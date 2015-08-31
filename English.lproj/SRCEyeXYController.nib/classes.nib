@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>LLEyeXYView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>centerDisplay</key>
+				<string>id</string>
+				<key>changeZoom</key>
+				<string>id</string>
+				<key>doOptions</key>
+				<string>id</string>
+				<key>endOptionSheet</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>SRCEyeXYController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>eyePlot</key>
+				<string>LLEyeXYView</string>
+				<key>optionsSheet</key>
+				<string>NSPanel</string>
+				<key>scrollView</key>
+				<string>NSScrollView</string>
+				<key>slider</key>
+				<string>NSSlider</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSWindowController</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

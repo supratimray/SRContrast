@@ -1,0 +1,40 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {changeZoom = id; }; 
+            CLASS = BehaviorView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                histView0 = LLHistView; 
+                histView1 = LLHistView; 
+                histView2 = LLHistView; 
+                histView3 = LLHistView; 
+                histView4 = LLHistView; 
+                histView5 = LLHistView; 
+                histView6 = LLHistView; 
+                histView7 = LLHistView; 
+                perfPlot = LLPlotView; 
+                reactPlot = LLPlotView; 
+                scrollView = NSScrollView; 
+                zoomButton = NSPopUpButton; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = LLHistView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = LLPlotView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {changeZoom = id; }; 
+            CLASS = LLScrollZoomWindow; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {scrollView = NSScrollView; zoomButton = NSPopUpButton; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            CLASS = MTCBehaviorController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = LLScrollZoomWindow; 
+        }
+    ); 
+    IBVersion = 1; 
+}
