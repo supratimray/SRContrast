@@ -8,7 +8,7 @@
 
 #import "SRCStateSystem.h"
 
-@interface SRCCueState : NSObject {
+@interface SRCCueState : LLState {
 
 	long			cueMS;
 	NSTimeInterval	expireTime;

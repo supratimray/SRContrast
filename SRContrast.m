@@ -207,7 +207,7 @@ NSTimeInterval	tooFastExpire;
 
 @implementation SRContrast
 
-+ (int)version {
++ (NSInteger)version {
 	return kLLPluginVersion;
 }
 
@@ -492,7 +492,8 @@ NSTimeInterval	tooFastExpire;
 	digitalOut = [[SRCDigitalOut alloc] init];
 
 	// Load the items in the nib
-	[NSBundle loadNibNamed:@"SRContrast" owner:self];
+    [[NSBundle bundleForClass:[self class]] loadNibNamed:@"SRContrast" owner:self topLevelObjects:&topLevelObjects];
+    [topLevelObjects retain];
 	
 	// Initialize other task objects
 	scheduler = [[LLScheduleController alloc] init];

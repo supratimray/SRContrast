@@ -80,7 +80,7 @@
 				pCurrent->factor != pLast->factor) {
 		[self makeLabels];
 		[ratePlot setPoints:pCurrent->levels];
-		[ratePlot setXAxisLabel:[NSString stringWithString:@"Contrasts"]];
+		[ratePlot setXAxisLabel:@"Contrasts"];
 		[self positionPlots];
 		pLast->levels = pCurrent->levels;
 		pLast->maxValue = pCurrent->maxValue;
@@ -172,7 +172,7 @@
 			[hist setTitle:[NSString stringWithFormat: @"%@ %@", 
 							@"Contrast", [labelArray objectAtIndex:level]]];
 			if (row == histRows - 1) {
-				[hist setXAxisLabel:[NSString stringWithString:@"time (ms)"]];
+				[hist setXAxisLabel:@"time (ms)"];
 			}
 			[hist hide:NO];
 			[hist setNeedsDisplay:YES];
@@ -212,7 +212,7 @@
 
 	ratePlot = [[[LLPlotView alloc] initWithFrame:
 			NSMakeRect(0, 0, kPlotWidthPix, kPlotHeightPix)] autorelease];
-    [ratePlot setXAxisLabel:[NSString stringWithString:@"Contrast"]];
+    [ratePlot setXAxisLabel:@"Contrast"];
     [ratePlot setXAxisTickLabels:xAxisLabelArray];
 	[documentView addSubview:ratePlot];
 	for (loc = 0; loc < kLocations; loc++) {
@@ -344,7 +344,7 @@
 			minN = MIN(minN, [[rates[loc] objectAtIndex:level] n]);
 		}
 	}
-	[ratePlot setTitle:[NSString stringWithFormat:@"Average Firing Rate (n >= %d)", minN]];
+	[ratePlot setTitle:[NSString stringWithFormat:@"Average Firing Rate (n >= %ld)", minN]];
 	[ratePlot setNeedsDisplay:YES];
 }
 

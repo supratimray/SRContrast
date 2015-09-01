@@ -264,10 +264,10 @@ NSString *SRCXTAutosaveKey = @"SRCXTAutosave";
 
 	if ((stimDesc.attendLoc == 0 && stimDesc.type0 == kTargetStim) ||
 			(stimDesc.attendLoc == 1 && stimDesc.type1 == kTargetStim)) {
-		[xtView eventName:[NSString stringWithFormat:@"Target %.0f%%", stimDesc.contrastIndex ] eventTime:eventTime];
+		[xtView eventName:[NSString stringWithFormat:@"Target %.0ld%%", stimDesc.contrastIndex ] eventTime:eventTime];
 	}
 	else {
-		[xtView eventName:[NSString stringWithFormat:@"%.0f%%", stimDesc.contrastIndex ] eventTime:eventTime];
+		[xtView eventName:[NSString stringWithFormat:@"%.0ld%%", stimDesc.contrastIndex ] eventTime:eventTime];
 	}
 }
 

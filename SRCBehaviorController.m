@@ -103,20 +103,20 @@
 		
 		for (t = 0; t < kMaxTemporalFreqs; t++) {
 			[reactPlot[t] setPoints:pCurrentContrast->levels];
-			[reactPlot[t] setXAxisLabel:[NSString stringWithString:@"Contrasts"]];
+			[reactPlot[t] setXAxisLabel:@"Contrasts"];
 			
 			[perfPlot[t] setPoints:pCurrentContrast->levels];
-			[perfPlot[t] setXAxisLabel:[NSString stringWithString:@"Contrasts"]];
+			[perfPlot[t] setXAxisLabel:@"Contrasts"];
 		}
 		
 		[totalTrialsPlot setPoints:MAX(1, MIN(maxTargetIndex+1,kMaxTargetPosition))];
-		[totalTrialsPlot setXAxisLabel:[NSString stringWithString:@"Target Position"]];
+		[totalTrialsPlot setXAxisLabel:@"Target Position"];
 		
 		[meanJuiceWithTimePlot setPoints:MAX(1, MIN(maxTargetIndex+1,kMaxTargetPosition))];
-		[meanJuiceWithTimePlot setXAxisLabel:[NSString stringWithString:@"Target Position"]];
+		[meanJuiceWithTimePlot setXAxisLabel:@"Target Position"];
 		
 		[perfWithTimePlot setPoints:MAX(1, MIN(maxTargetIndex+1,kMaxTargetPosition))];
-		[perfWithTimePlot setXAxisLabel:[NSString stringWithString:@"Target Position"]];
+		[perfWithTimePlot setXAxisLabel:@"Target Position"];
 		
 		[self positionPlots];
 		
@@ -231,7 +231,7 @@
 			[hist[cindex] setTitle:[NSString stringWithFormat: @"%@ %@", 
 									@"Contrast", [labelArray objectAtIndex:cindex]]];
 			if (row == histRows - 1) {
-				[hist[cindex] setXAxisLabel:[NSString stringWithString:@"time (ms)"]];
+				[hist[cindex] setXAxisLabel:@"time (ms)"];
 			}
 			[hist[cindex] hide:NO];
 			[hist[cindex] setNeedsDisplay:YES];
@@ -299,7 +299,7 @@
 	
 	[totalTrialsPlot  addPlot:totalTrials plotColor:[LLStandardDataEvents eotColor:kEOTForceQuit]];
 	[totalTrialsPlot  addPlot:totalCorrectTrials plotColor:[LLStandardDataEvents eotColor:kEOTCorrect]];
-	[totalTrialsPlot setXAxisLabel:[NSString stringWithString:@"Target Position"]];
+	[totalTrialsPlot setXAxisLabel:@"Target Position"];
 	[totalTrialsPlot setXAxisTickLabels:xAxisLabelArrayTargetIndex];
 	[[totalTrialsPlot scale] setHeight:1];
 	[documentView addSubview:totalTrialsPlot];
@@ -313,7 +313,7 @@
 	}
 	
 	[meanJuiceWithTimePlot  addPlot:juiceTimes plotColor:nil];
-	[meanJuiceWithTimePlot setXAxisLabel:[NSString stringWithString:@"Target Position"]];
+	[meanJuiceWithTimePlot setXAxisLabel:@"Target Position"];
 	[meanJuiceWithTimePlot setXAxisTickLabels:xAxisLabelArrayTargetIndex];
 	[[meanJuiceWithTimePlot scale] setHeight:MAX(1,MIN(rewardLimitMS,kMaxRewardLimitMS))];
 	[documentView addSubview:meanJuiceWithTimePlot];
@@ -337,7 +337,7 @@
 		}
 	}
 	
-	[perfWithTimePlot setXAxisLabel:[NSString stringWithString:@"Target Position"]];
+	[perfWithTimePlot setXAxisLabel:@"Target Position"];
 	[perfWithTimePlot setXAxisTickLabels:xAxisLabelArrayTargetIndex];
 	[[perfWithTimePlot scale] setHeight:1];	 
 	[perfWithTimePlot  setHighlightXRangeColor:highlightColor];
@@ -358,7 +358,7 @@
 		// Initialize the reaction time plot
 		reactPlot[tindex] = [[[LLPlotView alloc] initWithFrame:NSMakeRect(0, 0, kPlotWidthPix, kPlotHeightPix)] autorelease];
 		[reactPlot[tindex] addPlot:reactTimes[tindex] plotColor:nil];
-		[reactPlot[tindex] setXAxisLabel:[NSString stringWithString:@"Contrast"]];
+		[reactPlot[tindex] setXAxisLabel:@"Contrast"];
 		[reactPlot[tindex] setXAxisTickLabels:xAxisLabelArray];
 		[reactPlot[tindex] setHighlightXRangeColor:highlightColor];
 		[documentView addSubview:reactPlot[tindex]];
@@ -382,7 +382,7 @@
 			}
 		}
 		
-		[perfPlot[tindex]  setXAxisLabel:[NSString stringWithString:@"Contrast"]];
+		[perfPlot[tindex]  setXAxisLabel:@"Contrast"];
 		[perfPlot[tindex]  setXAxisTickLabels:xAxisLabelArray];
 		[[perfPlot[tindex]  scale] setAutoAdjustYMax:NO];
 		[[perfPlot[tindex]  scale] setHeight:1];
@@ -603,10 +603,10 @@
 		}
 		if (minN == LONG_MAX) {
 			[reactPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Reaction Times (TF: %.1f)", 
-												temporalFreqFromIndex(temporalFreqIndex), minN]];
+												temporalFreqFromIndex(temporalFreqIndex)]];
 		}
 		else
-			[reactPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Reaction Times (TF: %.1f, n >= %d)", 
+			[reactPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Reaction Times (TF: %.1f, n >= %ld)", 
 													temporalFreqFromIndex(temporalFreqIndex), minN]];
 		
 		[reactPlot[temporalFreqIndex] setNeedsDisplay:YES];

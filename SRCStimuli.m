@@ -57,7 +57,7 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 	NSLog(@"\ncIndex contrast type0 type0Orientation type1 type1Orientation stimOnFrame stimOffFrame");
 	for (index = 0; index < [stimList count]; index++) {
 		[[stimList objectAtIndex:index] getValue:&stimDesc];
-		NSLog(@"%4d: %4d \t%4d %.1f\t%24 %.1f\t %d %d", index, stimDesc.contrastIndex, 
+		NSLog(@"%4ld: %4ld \t%4ld %.1f\t %ld %.1f\t %ld %ld", index, stimDesc.contrastIndex,
 			  stimDesc.type0, stimDesc.orientationDeg0, stimDesc.type1, stimDesc.orientationDeg1, stimDesc.stimOnFrame, stimDesc.stimOffFrame);
 	}
 	NSLog(@"\n");

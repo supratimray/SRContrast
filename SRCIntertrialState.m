@@ -13,7 +13,7 @@
 - (void)dumpTrial {
 
 	NSLog(@"\n catch instruct, attendLoc numStim targetIndex distIndex stimOrientation targetOrientation");
-	NSLog(@"%d %d %d   %d %d %d   %.1f %.1f\n", trial.catchTrial, trial.instructTrial, trial.attendLoc,
+	NSLog(@"%d %d %ld   %ld %ld %ld   %.1f %.1f\n", trial.catchTrial, trial.instructTrial, trial.attendLoc,
 		trial.numStim, trial.targetIndex, trial.distIndex, trial.stimulusOrientation, trial.targetOrientation);
 }
 

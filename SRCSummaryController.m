@@ -177,58 +177,58 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
             break;
         case kDayColumn:
             if (row == kTotalRow) {
-                string = [NSString stringWithFormat:@"%d", dayEOTTotal];
+                string = [NSString stringWithFormat:@"%ld", dayEOTTotal];
             }
             else if (row == kRewardsRow) {
-                string = [NSString stringWithFormat:@"%d", dayEOTs[kEOTCorrect]];
+                string = [NSString stringWithFormat:@"%ld", dayEOTs[kEOTCorrect]];
             }
             else if (dayEOTTotal == 0) {
                 string = @" ";
             }
 			else if (row == kComputerRow) {		// row reserved for computer failures
-               string = [NSString stringWithFormat:@"%d", dayComputer];
+               string = [NSString stringWithFormat:@"%ld", dayComputer];
 			}
 			else if (row == kLastEOTTypeDisplayed-kEOTFAlarm){
-				string = [NSString stringWithFormat:@"%d%%", 
+				string = [NSString stringWithFormat:@"%ld%%", 
 						(long)round(dayEOTs[kLastEOTTypeDisplayed - row] * 100.0 / dayEOTTotal)];
 			}
 			else if (row == kLastEOTTypeDisplayed-kEOTDistracted){
-				string = [NSString stringWithFormat:@"%d%%", 
+				string = [NSString stringWithFormat:@"%ld%%", 
 						(long)round(dayEOTs[kLastEOTTypeDisplayed - row] * 100.0 / dayEOTTotal)];
 			}
 			
             else {
-               string = [NSString stringWithFormat:@"%d%%", 
+               string = [NSString stringWithFormat:@"%ld%%",
 							(long)round(dayEOTs[kLastEOTTypeDisplayed - row] * 100.0 / dayEOTTotal)];
             }
             break;
        case kRecentColumn:
             if (row == kTotalRow) {
-                string = [NSString stringWithFormat:@"%d", recentEOTTotal];
+                string = [NSString stringWithFormat:@"%ld", recentEOTTotal];
             }
             else if (row == kRewardsRow) {
-                string = [NSString stringWithFormat:@"%d", recentEOTs[kEOTCorrect]];
+                string = [NSString stringWithFormat:@"%ld", recentEOTs[kEOTCorrect]];
             }
             else if (recentEOTTotal == 0) {
                 string = @" ";
             }
 			else if (row == kComputerRow) {		// row reserved for computer failures
-               string = [NSString stringWithFormat:@"%d", recentComputer];
+               string = [NSString stringWithFormat:@"%ld", recentComputer];
 			}
            else {
 				if (recentEOTTotal == 0) {
 					string = @"";
 				}
 				else if (row == kLastEOTTypeDisplayed-kEOTFAlarm){
-					string = [NSString stringWithFormat:@"%d%%", 
+					string = [NSString stringWithFormat:@"%ld%%",
 							(long)round(recentEOTs[kLastEOTTypeDisplayed - row] * 100.0 / recentEOTTotal)];
 				}
 				else if (row == kLastEOTTypeDisplayed-kEOTDistracted){
-					string = [NSString stringWithFormat:@"%d%%", 
+					string = [NSString stringWithFormat:@"%ld%%",
 							(long)round(recentEOTs[kLastEOTTypeDisplayed - row] * 100.0 / recentEOTTotal)];
 				}
 				else {
-					string = [NSString stringWithFormat:@"%d%%", 
+					string = [NSString stringWithFormat:@"%ld%%",
 							(long)round(recentEOTs[kLastEOTTypeDisplayed - row] * 100.0 / recentEOTTotal)];
 				}
             }
@@ -291,7 +291,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 		column = [[tableColumn identifier] intValue];
 		
 		if (column >= kTemporalFreqColumn) {
-			if ((rowIndex == trial.targetTemporalFreqIndex)) {
+			if (rowIndex == trial.targetTemporalFreqIndex) {
 				[cell setBackgroundColor:[NSColor controlHighlightColor]];
 			}
 			else {
@@ -307,7 +307,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 	
     //double timeLeftS;
     NSAttributedString *cellContents;
-    NSMutableString *string = [NSMutableString string];
+    NSString *string;
 	StimParams *pContrastParam;
 	StimParams *pTemporalFreqParam;
 	BlockStatus *pBS = &blockStatus;
@@ -385,7 +385,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 	
     //double timeLeftS;
     NSAttributedString *cellContents;
-    NSMutableString *string = [NSMutableString string];
+    NSString *string;
 	StimParams *pContrastParam;
 	StimParams *pTemporalFreqParam;
 	BlockStatus *pBS = &blockStatus;
@@ -400,7 +400,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 	
 	switch (row) {
         case 0:
-			string = [NSString stringWithFormat:@"Attend side %d %@",  pBS->attendLoc, (trial.instructTrial) ? @"(Instruction trial)" : @""];
+			string = [NSString stringWithFormat:@"Attend side %ld %@",  pBS->attendLoc, (trial.instructTrial) ? @"(Instruction trial)" : @""];
 			break;
         case 1:
 			string = [NSString stringWithFormat:@"Contrasts: %ld, TFs: %ld", contrasts, temporalFreqs];
@@ -410,52 +410,50 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 								(pBS->blocksDone) + 1, (pBS->blockLimit)];
             break;
 		case 3:
-			string = [NSString stringWithFormat:@"Num Stim: %d, Target contrast: %.1f, TF: %.2f", trial.numStim, contrastFromIndex(trial.targetContrastIndex),temporalFreqFromIndex(trial.targetTemporalFreqIndex)];
+			string = [NSString stringWithFormat:@"Num Stim: %ld, Target contrast: %.1f, TF: %.2f", trial.numStim, contrastFromIndex(trial.targetContrastIndex),temporalFreqFromIndex(trial.targetTemporalFreqIndex)];
 			break;
 		case 4:
 			
-			string = [@"X " mutableCopy];
+			string = @"X ";
 			if (trial.numStim>1) {
 				for (index=1;index<trial.numStim;index++)		// First sample doesn't count
 				{
 					if (index<trial.targetIndex) {
 						
 						if (index==trial.distIndex)
-							[string appendString:@"X "];
+							string = [string stringByAppendingString:@"X "];
 						else
-							[string appendString:@"S "];
+							string = [string stringByAppendingString:@"S "];
 					}
 					else if (index == trial.targetIndex)
-						[string appendString:@"T "];
+						string = [string stringByAppendingString:@"T "];
 					
 					else {
 						if (index==trial.distIndex)
-							[string appendString:@"X "];
+							string = [string stringByAppendingString:@"X "];
 						else
-							[string appendString:@"s "];
+							string = [string stringByAppendingString:@"s "];
 					}
 				}
 			}
-			[string autorelease];
 			break;
 			
 		case 5:
 			
-			string = [@"X " mutableCopy];
+			string = @"X ";
 			if (trial.numStim>1) {
 				
 				for (index=1;index<trial.numStim;index++)		// First sample doesn't count
 				{
 					if (index==trial.targetIndex)
-						[string appendString:@"X "];
+						string = [string stringByAppendingString:@"X "];
 					else
 						if (index==trial.distIndex)
-							[string appendString:@"D "];
+							string = [string stringByAppendingString:@"D "];
 						else
-							[string appendString:@"S "];
+							string = [string stringByAppendingString:@"S "];
 				}
 			}
-			[string autorelease];
 			break;
         default:
             string = @"???";

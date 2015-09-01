@@ -22,6 +22,7 @@
 //	SRCStateSystem			*stateSystem;
     NSWindowController 		*summaryController;
 	LLTaskStatus			*taskStatus;
+    NSArray                 *topLevelObjects;
     NSWindowController 		*xtController;
 	
 	// Add Eye filters
