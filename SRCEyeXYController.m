@@ -242,7 +242,7 @@ NSString *SRCXYAutosaveKey = @"SRCXYAutosave";
 - (void)eyeCalibration:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	LLEyeCalibrationData cal;
 
-	[eventData getBytes:&cal];
+	[eventData getBytes:&cal length:sizeof(LLEyeCalibrationData)];
 	[unitsToDeg setTransformStruct:cal.calibration];
 	[degToUnits setTransformStruct:cal.calibration];
 	[degToUnits invert];
@@ -256,7 +256,7 @@ NSString *SRCXYAutosaveKey = @"SRCXYAutosave";
 
 	FixWindowData fixWindowData;
     
-	[eventData getBytes:&fixWindowData];
+	[eventData getBytes:&fixWindowData length:sizeof(FixWindowData)];
 	eyeWindowRectDeg = fixWindowData.windowDeg;
     [eyePlot setNeedsDisplay:YES];
 }
@@ -281,13 +281,13 @@ NSString *SRCXYAutosaveKey = @"SRCXYAutosave";
 
 	FixWindowData respWindowData;
     
-	[eventData getBytes:&respWindowData];
+	[eventData getBytes:&respWindowData length:sizeof(FixWindowData)];
 	respWindowRectDeg[respWindowData.index] = respWindowData.windowDeg;
     [eyePlot setNeedsDisplay:YES];
 }
 
 - (void)trial:(NSData *)eventData eventTime:(NSNumber *)eventTime {
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
     inTrial = YES;
 }
 

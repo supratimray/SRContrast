@@ -115,6 +115,7 @@ NSString *SRCXTAutosaveKey = @"SRCXTAutosave";
 - (void)windowDidLoad {
     long index, defaultZoom, deltaHeight, deltaWidth;
     NSSize baseScrollFrameSize, windowFrameSize, baseViewSize;
+    NSScroller *hScroller, *vScroller;
 
  //   [xtView setSamplePeriodMS:kSamplePeriodMS spikeChannels:kSpikeChannels spikeTickPerMS:kTimestampTickMS];
     [xtView setDurationS:5.0];   // ?? This should be controlled by a dialog and saved in preferences. 
@@ -123,8 +124,20 @@ NSString *SRCXTAutosaveKey = @"SRCXTAutosave";
 	// setting the maximum zoom size when the scale changes.
     
     baseViewSize = [xtView sizePix];											// native size of the LLXTView
-    baseScrollFrameSize = [NSScrollView frameSizeForContentSize:baseViewSize	// native size of frame for LLXTView
-            hasHorizontalScroller:YES hasVerticalScroller:YES borderType:[scrollView borderType]];
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 1070
+    hScroller = [scrollView horizontalScroller];
+    vScroller = [scrollView verticalScroller];
+    baseScrollFrameSize = [NSScrollView frameSizeForContentSize:baseViewSize
+                                        horizontalScrollerClass:[hScroller class] verticalScrollerClass:[vScroller class]
+                                                     borderType:[scrollView borderType]
+                                                    controlSize:[hScroller controlSize] scrollerStyle:[hScroller scrollerStyle]];
+#else
+    baseScrollFrameSize = [NSScrollView frameSizeForContentSize:baseViewSize
+                                          hasHorizontalScroller:YES hasVerticalScroller:YES borderType:[scrollView borderType]];
+#endif
+    
+//    baseScrollFrameSize = [NSScrollView frameSizeForContentSize:baseViewSize	// native size of frame for LLXTView
+//            hasHorizontalScroller:YES hasVerticalScroller:YES borderType:[scrollView borderType]];
 	deltaWidth = baseScrollFrameSize.width - [scrollView frame].size.width;		// allow for frame's current size
     deltaHeight = baseScrollFrameSize.height - [scrollView frame].size.height;
     windowFrameSize = [[self window] frame].size;
@@ -206,7 +219,7 @@ NSString *SRCXTAutosaveKey = @"SRCXTAutosave";
 
 	FixWindowData fixWindowData;
     
-	[eventData getBytes:&fixWindowData];
+	[eventData getBytes:&fixWindowData length:sizeof(FixWindowData)];
     [xtView eyeRect:fixWindowData.windowUnits time:[eventTime longValue]];
 }
 
@@ -258,7 +271,7 @@ NSString *SRCXTAutosaveKey = @"SRCXTAutosave";
 - (void)stimulus:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	StimDesc stimDesc;
 	
-	[eventData getBytes:&stimDesc];
+	[eventData getBytes:&stimDesc length:sizeof(StimDesc)];
 	[xtView stimulusBarColor:[NSColor grayColor] eventTime:eventTime];
 	//NSLog(@"GaborOn:%d", [eventTime longValue]);
 
@@ -288,7 +301,7 @@ NSString *SRCXTAutosaveKey = @"SRCXTAutosave";
 
     long eotCode;
     
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 	[xtView eventName:[LLStandardDataEvents trialEndName:eotCode] eventTime:eventTime];
 	[xtView stimulusBarColor:[NSColor whiteColor] eventTime:eventTime];
 }

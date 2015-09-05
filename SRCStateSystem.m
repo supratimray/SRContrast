@@ -110,7 +110,7 @@ TrialDesc			trial;
 	StimParams stimParams;
 	
 	if (stimType >= 0) {
-		[eventData getBytes:&stimParams];
+        [eventData getBytes:&stimParams length:sizeof(StimParams)];
 	}
 }
 
@@ -118,7 +118,7 @@ TrialDesc			trial;
 	StimParams stimParams;
 	
 	if (stimType >= 0) {
-		[eventData getBytes:&stimParams];
+		[eventData getBytes:&stimParams length:sizeof(StimParams)];
 	}
 }
 
@@ -154,7 +154,7 @@ TrialDesc			trial;
 - (void) tries:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
 	long tries;
-	[eventData getBytes:&tries];
+	[eventData getBytes:&tries length:sizeof(long)];
 }
 
 @end

@@ -420,19 +420,19 @@
 
 
 - (void)contrastParams:(NSData *)eventData eventTime:(NSNumber *)eventTime {
-	[eventData getBytes:&contrastParams];
+	[eventData getBytes:&contrastParams length:sizeof(StimParams)];
 	[self checkParams];
 }
 
 - (void)juiceMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	
-	[eventData getBytes:&juiceMS];
+	[eventData getBytes:&juiceMS length:sizeof(long)];
 }
 
 - (void)maxTargetIndex:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	long newMaxTargetIndex;
 	
-	[eventData getBytes:&newMaxTargetIndex];
+	[eventData getBytes:&newMaxTargetIndex length:sizeof(long)];
 	
 	
 	if (newMaxTargetIndex != maxTargetIndex) { 
@@ -447,7 +447,7 @@
 - (void)rewardLimitMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	long newRewardLimitMS;
 	
-	[eventData getBytes:&newRewardLimitMS];
+	[eventData getBytes:&newRewardLimitMS length:sizeof(long)];
 	
 	if (rewardLimitMS != newRewardLimitMS) {
 		rewardLimitMS = newRewardLimitMS;
@@ -489,7 +489,7 @@
 
     long newResponseTimeMS;
     
-    [eventData getBytes:&newResponseTimeMS];
+    [eventData getBytes:&newResponseTimeMS length:sizeof(long)];
     if (responseTimeMS != newResponseTimeMS) {
         responseTimeMS = newResponseTimeMS;
         [self changeResponseTimeMS];
@@ -504,7 +504,7 @@
 - (void)stimulus:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	StimDesc stimDesc;
 	
-	[eventData getBytes:&stimDesc];
+	[eventData getBytes:&stimDesc length:sizeof(StimDesc)];
 	if ((stimDesc.attendLoc == 0 && stimDesc.type0 == kTargetStim) || (stimDesc.attendLoc == 1 && stimDesc.type1 == kTargetStim)) {
 		targetOnTimeMS = [eventTime unsignedLongValue];
 	}
@@ -513,7 +513,7 @@
 - (void)taskMode:(NSData *)eventData eventTime:(NSNumber *)eventTime {
     long taskMode;
     
-	[eventData getBytes:&taskMode];
+	[eventData getBytes:&taskMode length:sizeof(long)];
     if (taskMode == kTaskIdle) {
         if (histHighlightIndex >= 0) {
             [hist[histHighlightIndex] setHighlightHist:NO];
@@ -529,14 +529,14 @@
 }
 
 - (void)temporalFreqParams:(NSData *)eventData eventTime:(NSNumber *)eventTime {
-	[eventData getBytes:&temporalFreqParams];
+	[eventData getBytes:&temporalFreqParams length:sizeof(StimParams)];
 	[self checkParams];
 }
 
 		
 - (void)trial:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
 	
 	// Highlight the appropriate histogram
 	if (histHighlightIndex != trial.targetContrastIndex) {
@@ -579,7 +579,7 @@
 	if (contrastIndex < 0) {
 		return;
 	}
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 	
 	// if correct, add the juice reward value to juiceTimes
 	if (eotCode == kEOTCorrect) {

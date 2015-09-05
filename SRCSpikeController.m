@@ -234,12 +234,12 @@
 }
 
 - (void)contrastStimParams:(NSData *)eventData eventTime:(NSNumber *)eventTime {
-	[eventData getBytes:&stimParams];
+	[eventData getBytes:&stimParams length:sizeof(StimParams)];
 	[self checkParams];
 }
 
 - (void)interstimMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
-	[eventData getBytes:&interstimDurMS];
+	[eventData getBytes:&interstimDurMS length:sizeof(long)];
 	[self changeHistTimeMS];
 }
 
@@ -265,7 +265,7 @@
 
 
 - (void)stimDurationMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
-	[eventData getBytes:&stimDurMS];
+	[eventData getBytes:&stimDurMS length:sizeof(long)];
 	[self changeHistTimeMS];
 }
 
@@ -287,7 +287,7 @@
 
 - (void)trial:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
 	trialStartTime = [eventTime longValue];
 
 	// Highlight the appropriate histogram
@@ -309,7 +309,7 @@
 	
 	// Nothing to update on catch trials
 
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 	if (eotCode != kEOTCorrect) {
 		return;
 	}

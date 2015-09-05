@@ -468,17 +468,17 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 
 - (void)blockStatus:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&blockStatus];
+    [eventData getBytes:&blockStatus length:sizeof(BlockStatus)];
 }
 
 - (void) contrastParams:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&contrastParams];
+	[eventData getBytes:&contrastParams length:sizeof(StimParams)];
 }
 
 - (void)juiceMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	
-	[eventData getBytes:&juiceMS];
+	[eventData getBytes:&juiceMS length:sizeof(long)];
 	totalJuiceMS += juiceMS;
 	[juiceTextField setStringValue:[NSString stringWithFormat:@"%ld", totalJuiceMS ]];
 }
@@ -505,13 +505,13 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 
 - (void)stimAdded:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	
-	[eventData getBytes:&stimAdded];
+	[eventData getBytes:&stimAdded length:sizeof(long)];
 }
 
 
 - (void) taskMode:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&taskMode];
+	[eventData getBytes:&taskMode length:sizeof(long)];
     switch (taskMode) {
         case kTaskRunning:
             lastStartTimeS = [LLSystemUtil getTimeS];
@@ -526,14 +526,14 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 
 - (void) temporalFreqParams:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 	
-	[eventData getBytes:&temporalFreqParams];
+	[eventData getBytes:&temporalFreqParams length:sizeof(StimParams)];
 }
 
 - (void) trialCertify:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
 	long certifyCode; 
 	
-	[eventData getBytes:&certifyCode];
+	[eventData getBytes:&certifyCode length:sizeof(long)];
     if (certifyCode != 0) { // -1 because computer errors stored separately
         recentComputer++;  
         dayComputer++;  
@@ -543,7 +543,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 
 - (void) trialEnd:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
     if (eotCode <= kLastEOTTypeDisplayed) {
         recentEOTs[eotCode]++;
         recentEOTTotal++;  
@@ -607,7 +607,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 
 - (void) trial:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
     newTrial = YES;
 	[trialTable reloadData];
     [percentTable reloadData];

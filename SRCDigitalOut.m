@@ -20,12 +20,12 @@
 	if ((self = [super init])) {
 		digitalOutDevice = (LLITC18DataDevice *)[[task dataController] deviceWithName:@"ITC-18 1"];
 		if (digitalOutDevice == nil) {
-			NSRunAlertPanel(@"SRCDigitalOut",  @"Can't find data device named \"%@\", trying ITC-18 instead.", 
-						@"OK", nil, nil, @"ITC-18 1");
+//			NSRunAlertPanel(@"SRCDigitalOut",  @"Can't find data device named \"%@\", trying ITC-18 instead.",
+//						@"OK", nil, nil, @"ITC-18 1");
 			digitalOutDevice = (LLITC18DataDevice *)[[task dataController] deviceWithName:@"ITC-18"];
 			if (digitalOutDevice == nil) {
-				NSRunAlertPanel(@"SRCContrast",  @"Can't find data device named \"%@\" (Quitting)", 
-							@"OK", nil, nil, @"ITC-18");
+//				NSRunAlertPanel(@"SRCContrast",  @"Can't find data device named \"%@\" (Quitting)",
+//							@"OK", nil, nil, @"ITC-18");
 				exit(0);
 			}
 		}
@@ -99,8 +99,8 @@
 	else if ([eventName isEqualTo:@"type1"] || [eventName isEqualTo:@"T1"] )
 		[digitalOutDevice digitalOutputBits:(0x5431 | 0x8000)]; 
 	else
-		NSRunAlertPanel(@"SRCDigitalOut",  @"Can't find digital event named \"%@\".", 
-						@"OK", nil, nil, eventName);
+//		NSRunAlertPanel(@"SRCDigitalOut",  @"Can't find digital event named \"%@\".",
+//						@"OK", nil, nil, eventName);
 	
 	
 	[digitalOutDevice digitalOutputBits:(data & 0x7fff)];
