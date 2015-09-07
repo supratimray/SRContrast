@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>SRCAcquireMS</key>
 	<integer>2000</integer>
+	<key>SRCAzimuth0Deg</key>
+	<real>3</real>
+	<key>SRCAzimuth1Deg</key>
+	<integer>-3</integer>
 	<key>SRCBehaviorWindowVisible</key>
 	<true/>
 	<key>SRCBehaviorWindowZoom</key>
@@ -12,20 +16,26 @@
 	<integer>100</integer>
 	<key>SRCBreakPunishMS</key>
 	<integer>0</integer>
+	<key>SRCChangeInOrientationDeg</key>
+	<integer>30</integer>
 	<key>SRCContrastFactor</key>
 	<real>0.5</real>
 	<key>SRCContrast</key>
 	<integer>100</integer>
 	<key>SRCContrasts</key>
 	<integer>8</integer>
+	<key>SRCCoupleTemporalFreqs</key>
+	<false/>
 	<key>SRCCueMS</key>
 	<integer>250</integer>
 	<key>SRCDoSounds</key>
 	<true/>
 	<key>SRCDistractorContrastRatio</key>
-	<real>1.0</real>
-	<key>SRCEccentricityDeg</key>
-	<real>3</real>
+	<real>1</real>
+	<key>SRCElevation0Deg</key>
+	<integer>3</integer>
+	<key>SRCElevation1Deg</key>
+	<integer>-3</integer>
 	<key>SRCEyeXYDoGrid</key>
 	<true/>
 	<key>SRCEyeXYDoTicks</key>
@@ -73,23 +83,21 @@
 	<key>SRCMaxTargetMS</key>
 	<integer>5000</integer>
 	<key>SRCMaxTemporalFreqHz</key>
-	<real>4.0</real>
+	<real>4</real>
 	<key>SRCMeanTargetMS</key>
 	<integer>2500</integer>
 	<key>SRCNumInstructTrials</key>
 	<integer>2</integer>
 	<key>SRCDirectionDeg</key>
-	<real>0.0</real>
+	<real>0</real>
 	<key>SRCPrecueMS</key>
 	<integer>250</integer>
 	<key>SRCPrecueJitterPC</key>
 	<integer>50</integer>
-	<key>SRCPolarAngleDeg</key>
-	<real>180</real>
 	<key>SRCReactMS</key>
 	<integer>750</integer>
 	<key>SRCRelDistractorProb</key>
-	<real>1.0</real>
+	<real>1</real>
 	<key>SRCRespTimeMS</key>
 	<integer>500</integer>
 	<key>SRCRespSpotSizeDeg</key>
@@ -98,6 +106,8 @@
 	<real>2</real>
 	<key>SRCRewardMS</key>
 	<integer>100</integer>
+	<key>SRCUseStaircaseProcedure</key>
+	<false/>
 	<key>SRCVarRewardOn</key>
 	<true/>
 	<key>SRCVarRewardMinMS</key>
@@ -116,8 +126,10 @@
 	<real>2.5</real>
 	<key>SRCGaborSigmaDeg</key>
 	<real>0.25</real>
-	<key>SRCGaborSpatialFreqCPD</key>
+	<key>SRCSpatialFreq0CPD</key>
 	<real>4</real>
+	<key>SRCSpatialFreq1CPD</key>
+	<integer>4</integer>
 	<key>SRCSpatialModulationType</key>
 	<integer>1</integer>
 	<key>SRCSpatialPhaseDeg</key>
@@ -132,8 +144,10 @@
 	<integer>0</integer>
 	<key>SRCStimLeadMS</key>
 	<integer>500</integer>
-	<key>SRCStimulusOrientationDeg</key>
-	<real>10.0</real>
+	<key>SRCStimulusOrientation0Deg</key>
+	<integer>0</integer>
+	<key>SRCStimulusOrientation1Deg</key>
+	<integer>45</integer>
 	<key>SRCSummaryWindowBrokeCount</key>
 	<integer>0</integer>
 	<key>SRCSummaryWindowComputerCount</key>
@@ -154,12 +168,10 @@
 	<integer>0</integer>
 	<key>SRCSummaryWindowZoom</key>
 	<integer>100</integer>
-	<key>SRCTargetOrientationDeg</key>
-	<real>45.0</real>
 	<key>SRCTaskStatus</key>
 	<integer>0</integer>
 	<key>SRCTemporalFreqHz</key>
-	<real>0.0</real>
+	<real>0</real>
 	<key>SRCTemporalFreqs</key>
 	<integer>4</integer>
 	<key>SRCTemporalModulationParam</key>

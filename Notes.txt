@@ -1,0 +1,9 @@
+
+List of Modifications
+
+1. Use Azi and Ele instead of eccentricity and polar angle
+2. Gabor 0 and 1 could potentially have different SF, base orientation, azi and ele
+3. Use "Change in orientation" instead of target orientation, could either be fixed or follow a staircase method
+4. Temporal frequency could be run in the "flipped mode", in which there are exactly two non-zero TFs, with the first non-zero temporal frequency at Gabor 0 is coupled with the other non-zero TF at Gabor 1. There are a total of 3 TF pairs - {0,0}, {TF1,TF2} and {TF2,TF1}
+5. Feature Attention Mode. This requires two orientations - O1 and O2. Across blocks, base orientations will change in the following manner - {O1,O1},{O2,O1},{O1,O2},{O2,O2}.
+

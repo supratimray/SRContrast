@@ -54,11 +54,11 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 	StimDesc stimDesc;
 	long index;
 	
-	NSLog(@"\ncIndex contrast type0 type0Orientation type1 type1Orientation stimOnFrame stimOffFrame");
+	NSLog(@"\ncIndex contrast type0 type0 Orientation type1 type1 Orientation stimOnFrame stimOffFrame");
 	for (index = 0; index < [stimList count]; index++) {
 		[[stimList objectAtIndex:index] getValue:&stimDesc];
 		NSLog(@"%4ld: %4ld \t%4ld %.1f\t %ld %.1f\t %ld %ld", index, stimDesc.contrastIndex,
-			  stimDesc.type0, stimDesc.orientationDeg0, stimDesc.type1, stimDesc.orientationDeg1, stimDesc.stimOnFrame, stimDesc.stimOffFrame);
+			  stimDesc.type0, stimDesc.orientation0Deg, stimDesc.type1, stimDesc.orientation1Deg, stimDesc.stimOnFrame, stimDesc.stimOffFrame);
 	}
 	NSLog(@"\n");
 }
@@ -123,12 +123,18 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 	
 	stimDesc.attendLoc = attendLoc;
 	stimDesc.type0 = type0;
-	stimDesc.orientationDeg0 = (type0 == kTargetStim) ? pTrial->targetOrientation : pTrial->stimulusOrientation;
+	stimDesc.orientation0Deg = (type0 == kTargetStim) ? (pTrial->stimulusOrientation0 +  pTrial->changeInOrientation) : pTrial->stimulusOrientation0;
 	stimDesc.type1 = type1;
-	stimDesc.orientationDeg1 = (type1 == kTargetStim) ? pTrial->targetOrientation : pTrial->stimulusOrientation;
+	stimDesc.orientation1Deg = (type1 == kTargetStim) ? (pTrial->stimulusOrientation1 +  pTrial->changeInOrientation) : pTrial->stimulusOrientation1;
 	stimDesc.contrastIndex = cIndex;
 	stimDesc.temporalFreqIndex = tIndex;
 	
+    stimDesc.spatialFreq0CPD = [[task defaults] floatForKey:SRCSpatialFreq0CPDKey];
+    stimDesc.spatialFreq1CPD = [[task defaults] floatForKey:SRCSpatialFreq1CPDKey];
+    stimDesc.temporalFreq0Hz = temporalFreqFromIndex(tIndex,0);
+    stimDesc.temporalFreq1Hz = temporalFreqFromIndex(tIndex,1);
+    
+    
 	if (index < 0 || index > [stimList count]) {
 		index = [stimList count];
 	}
@@ -156,11 +162,12 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 		else
 			[gabors[index] directSetContrast:distractorContrastRatio*contrastFromIndex(pSD->contrastIndex) / 100.0];
 		
-		[gabors[index] directSetTemporalFreqHz:temporalFreqFromIndex(pSD->temporalFreqIndex)];
-		[gabors[index] directSetDirectionDeg:((index == 0) ? pSD->orientationDeg0 : pSD->orientationDeg1)];
+		[gabors[index] directSetDirectionDeg:((index == 0) ? pSD->orientation0Deg : pSD->orientation1Deg)];
+        [gabors[index] directSetSpatialFreqCPD:((index == 0) ? pSD->spatialFreq0CPD : pSD->spatialFreq1CPD)];
+        [gabors[index] directSetTemporalFreqHz:((index == 0) ? pSD->temporalFreq0Hz : pSD->temporalFreq1Hz)];
 		[gabors[index] setTemporalModulation:0.0];		// Counterphasing
 		
-		if (temporalFreqFromIndex(pSD->temporalFreqIndex) == maxAllowableTempFreq()) {
+		if (temporalFreqFromIndex(pSD->temporalFreqIndex,index) == maxAllowableTempFreq()) {
 			//NSLog(@"Changing phase to 90 degrees... ");
 			[gabors[index] directSetTemporalPhaseDeg:90.0];
 		}
@@ -206,7 +213,7 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 	long stim, sectionStart, frontPadStim, nextStimOnFrame;
 	long stimDurFrames, interDurFrames, stimJitterPC, interJitterPC, stimJitterFrames, interJitterFrames;
 	long stimDurBase, interDurBase, remaining, stimListLength, minStimDone;
-	float stimRateHz, stimOrientation, targetOrientation;
+	float stimRateHz, stimOrientation0, stimOrientation1, changeInOrientation;
 	long i;
 	StimDesc stimDesc;
 	BOOL insertDist;
@@ -214,8 +221,9 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 	attendLoc = pTrial->attendLoc;
 	targetIndex = pTrial->targetIndex;
 	distIndex = pTrial->distIndex;
-	stimOrientation = pTrial->stimulusOrientation;
-	targetOrientation = pTrial->targetOrientation;
+	stimOrientation0 = pTrial->stimulusOrientation0;
+    stimOrientation1 = pTrial->stimulusOrientation1;
+	changeInOrientation = pTrial->changeInOrientation;
 	stimListLength = pTrial->numStim;
 	instructTrial = pTrial->instructTrial;
 	
@@ -380,11 +388,11 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 			
 			if (attendLoc == kAttend0) {
 				stimDesc.type1 = kTargetStim;
-				stimDesc.orientationDeg1 = pTrial->targetOrientation;
+				stimDesc.orientation1Deg = (pTrial->stimulusOrientation1 + pTrial->changeInOrientation);
 			}
 			else {
 				stimDesc.type0 = kTargetStim;
-				stimDesc.orientationDeg0 = pTrial->targetOrientation;
+				stimDesc.orientation0Deg = (pTrial->stimulusOrientation0 + pTrial->changeInOrientation);
 			}
 			[stimList replaceObjectAtIndex:distIndex 
 								withObject:[NSValue valueWithBytes:&stimDesc objCType:@encode(StimDesc)]];
@@ -400,10 +408,10 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 				[[stimList objectAtIndex:i] getValue:&stimDesc];
 			
 				if (stimDesc.attendLoc == kAttend0) {
-					stimDesc.orientationDeg0 = pTrial->targetOrientation;
+					stimDesc.orientation0Deg = (pTrial->stimulusOrientation0 + pTrial->changeInOrientation);
 				}
 				else {
-					stimDesc.orientationDeg1 = pTrial->targetOrientation;
+					stimDesc.orientation1Deg = (pTrial->stimulusOrientation1 + pTrial->changeInOrientation);
 				}
 				[stimList replaceObjectAtIndex:i 
 									withObject:[NSValue valueWithBytes:&stimDesc objCType:@encode(StimDesc)]];
@@ -445,11 +453,11 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 		if (instructTrial) {			
 			if (attendLoc == kAttend0) {
 				stimDesc.type1 = kNullStim;
-				stimDesc.orientationDeg1 = stimOrientation;
+				stimDesc.orientation1Deg = stimOrientation1;
 			}
 			else {
 				stimDesc.type0 = kNullStim;
-				stimDesc.orientationDeg0 = stimOrientation;	
+				stimDesc.orientation0Deg = stimOrientation0;
 			}
 		}
 		[stimList replaceObjectAtIndex:stim withObject: [NSValue valueWithBytes:&stimDesc objCType:@encode(StimDesc)]];

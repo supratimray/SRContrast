@@ -10,7 +10,7 @@
 void			announceEvents(void);
 NSPoint			azimuthAndElevationForStimIndex(long index);
 float			contrastFromIndex(long index);
-float			temporalFreqFromIndex(long index); 
+float			temporalFreqFromIndex(long index, long stimIndex);
 StimParams		*getContrastParams(void);
 StimParams		*getTemporalFreqParams(void);
 void			putBlockDataEvents(long blocksDone, long location);

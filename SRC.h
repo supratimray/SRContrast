@@ -61,9 +61,12 @@ typedef struct StimDesc {
 	long	type1;					// 'type' of stimulus at location 1.
 	long	contrastIndex;			// Contrast index number of the stimulus at both locations
 	long	temporalFreqIndex;		// Temporal frequency of both stimuli
-	float	orientationDeg0;		// Orientation of the stimulus at location 0
-	float	orientationDeg1;		// Orientation of the stimulus at location 1
-	
+	float	orientation0Deg;		// Orientation of the stimulus at location 0
+	float	orientation1Deg;		// Orientation of the stimulus at location 1
+    float   spatialFreq0CPD;
+    float   spatialFreq1CPD;
+    float   temporalFreq0Hz;
+    float   temporalFreq1Hz;
 } StimDesc;
 
 typedef struct TrialDesc {
@@ -71,8 +74,9 @@ typedef struct TrialDesc {
 	BOOL	instructTrial;			// Indicates if this is an instruction trial
 	long	attendLoc;				// Location to attend
 	long	numStim;				// Number of stimuli in the trial
-	float	stimulusOrientation;		// Orientation of the stimulus 
-	float	targetOrientation;			// Orientation of the target (and distractor)
+	float	stimulusOrientation0;		// Orientation of the stimulus
+    float	stimulusOrientation1;		// Orientation of the stimulus
+	float	changeInOrientation;			// Change in orientation in the target (and distractor)
 	long	targetIndex;				// Position of the target stimulus
 	long	distIndex;					// Position of the distractor stimulus
 	long	targetContrastIndex;		// Contrast index of the target (and distractor)
@@ -130,14 +134,20 @@ extern NSString *SRCStimJitterPCKey;
 extern NSString *SRCInterstimMSKey;
 extern NSString *SRCInterstimJitterPCKey;
 
-// Fixed Gabor Settings
-extern NSString *SRCGaborSpatialFreqCPDKey;
-extern NSString *SRCStimulusOrientationDegKey;			
-extern NSString *SRCTargetOrientationDegKey;
-extern NSString *SRCEccentricityDegKey;
-extern NSString *SRCPolarAngleDegKey;
+// Gabor 0 Settings
+extern NSString *SRCSpatialFreq0CPDKey;
+extern NSString *SRCStimulusOrientation0DegKey;
+extern NSString *SRCAzimuth0DegKey;
+extern NSString *SRCElevation0DegKey;
+
+// Gabor 1 Settings
+extern NSString *SRCSpatialFreq1CPDKey;
+extern NSString *SRCStimulusOrientation1DegKey;
+extern NSString *SRCAzimuth1DegKey;
+extern NSString *SRCElevation1DegKey;
 
 // Variable Gabor Settings
+extern NSString *SRCChangeInOrientationDegKey;
 extern NSString *SRCGaborRadiusDegKey;
 extern NSString *SRCGaborSigmaDegKey;
 
@@ -150,6 +160,9 @@ extern NSString	*SRCTemporalFreqsKey;
 extern NSString	*SRCMaxTemporalFreqHzKey;
 extern NSString *SRCTemporalFreqFactorKey;
 extern NSString *SRCGaborTemporalFreqHzKey;
+
+extern NSString *SRCCoupleTemporalFreqsKey;
+extern NSString *SRCUseStaircaseProcedureKey;
 
 #import "SRCStimuli.h"
 

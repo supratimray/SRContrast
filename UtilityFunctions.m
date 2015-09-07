@@ -27,13 +27,21 @@ void announceEvents(void) {
 	[[task dataDoc] putEvent:@"gabor" withData:(Ptr)[[stimuli gabor0] gaborData]];
 	[[task dataDoc] putEvent:@"gabor" withData:(Ptr)[[stimuli gabor1] gaborData]];
 	
-    floatValue = [[task defaults] floatForKey:SRCEccentricityDegKey];
-	[[task dataDoc] putEvent:@"eccentricityDeg" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"eccentricity" withData:(long)(round(100*floatValue))];		// Put in the digital events
-	
-    floatValue = [[task defaults] floatForKey:SRCPolarAngleDegKey];
-	[[task dataDoc] putEvent:@"polarAngleDeg" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"polarAngle" withData:(long)(floatValue)];						// Put in the digital events
+    floatValue = [[task defaults] floatForKey:SRCAzimuth0DegKey];
+    [[task dataDoc] putEvent:@"azimuth0Deg" withData:(Ptr)&floatValue];
+    [digitalOut outputEventName:@"azimuth" withData:(long)(floatValue)];						// Put in the digital events
+    
+    floatValue = [[task defaults] floatForKey:SRCAzimuth1DegKey];
+    [[task dataDoc] putEvent:@"azimuth1Deg" withData:(Ptr)&floatValue];
+    [digitalOut outputEventName:@"azimuth" withData:(long)(floatValue)];						// Put in the digital events
+    
+    floatValue = [[task defaults] floatForKey:SRCElevation0DegKey];
+    [[task dataDoc] putEvent:@"elevation0Deg" withData:(Ptr)&floatValue];
+    [digitalOut outputEventName:@"elevation" withData:(long)(round(100*floatValue))];		// Put in the digital events
+    
+    floatValue = [[task defaults] floatForKey:SRCElevation1DegKey];
+	[[task dataDoc] putEvent:@"elevation1Deg" withData:(Ptr)&floatValue];
+	[digitalOut outputEventName:@"elevation" withData:(long)(round(100*floatValue))];		// Put in the digital events
 	
 	floatValue = [[task defaults] floatForKey:SRCGaborSigmaDegKey];
 	[[task dataDoc] putEvent:@"sigmaDeg" withData:(Ptr)&floatValue];
@@ -43,15 +51,22 @@ void announceEvents(void) {
 	[[task dataDoc] putEvent:@"radiusDeg" withData:(Ptr)&floatValue];
 	[digitalOut outputEventName:@"radius" withData:(long)(100*floatValue)];						// Put in the digital events
 	
-	floatValue = [[task defaults] floatForKey:SRCStimulusOrientationDegKey];
-	[[task dataDoc] putEvent:@"stimOrientationDeg" withData:(Ptr)&floatValue];
+	floatValue = [[task defaults] floatForKey:SRCStimulusOrientation0DegKey];
+	[[task dataDoc] putEvent:@"stimOrientation0Deg" withData:(Ptr)&floatValue];
 	[digitalOut outputEventName:@"orientation" withData:(long)(floatValue)];					// Put in the digital events
 	
-	floatValue = [[task defaults] floatForKey:SRCGaborSpatialFreqCPDKey];
-	[[task dataDoc] putEvent:@"spatialFreqCPD" withData:(Ptr)&floatValue];
+    floatValue = [[task defaults] floatForKey:SRCStimulusOrientation1DegKey];
+    [[task dataDoc] putEvent:@"stimOrientation1Deg" withData:(Ptr)&floatValue];
+    [digitalOut outputEventName:@"orientation" withData:(long)(floatValue)];					// Put in the digital events
+    
+	floatValue = [[task defaults] floatForKey:SRCSpatialFreq0CPDKey];
+	[[task dataDoc] putEvent:@"spatialFreq0CPD" withData:(Ptr)&floatValue];
 	[digitalOut outputEventName:@"spatialFrequency" withData:(long)(100*floatValue)];			// Put in the digital events
 	
-	
+    floatValue = [[task defaults] floatForKey:SRCSpatialFreq1CPDKey];
+    [[task dataDoc] putEvent:@"spatialFreq1CPD" withData:(Ptr)&floatValue];
+    [digitalOut outputEventName:@"spatialFrequency" withData:(long)(100*floatValue)];			// Put in the digital events
+    
     lValue = [[task defaults] integerForKey:SRCStimDurationMSKey];
 	[[task dataDoc] putEvent:@"stimDurationMS" withData:(Ptr)&lValue];
 	lValue = [[task defaults] integerForKey:SRCStimJitterPCKey];
@@ -76,19 +91,17 @@ void announceEvents(void) {
 }
 
  NSPoint azimuthAndElevationForStimIndex(long index) {
-	float  polarAngleRad, eccentricityDeg, polarAngleDeg;
+	
 	NSPoint aziEle;
 
-	eccentricityDeg = [[task defaults] floatForKey:SRCEccentricityDegKey];
-	polarAngleDeg = [[task defaults] floatForKey:SRCPolarAngleDegKey];
-	 
-	if (index == 1){			//eccentricity and polar angles are defined for index 0
-		 polarAngleDeg = ((polarAngleDeg - 180.0 < 0) ? polarAngleDeg + 180.0 : polarAngleDeg - 180.0 );
-	 }
-	 
-	polarAngleRad = polarAngleDeg / kDegPerRadian;
-	aziEle.x = eccentricityDeg * cos(polarAngleRad);
-	aziEle.y = eccentricityDeg * sin(polarAngleRad);
+     if (index == 0){
+         aziEle.x = [[task defaults] floatForKey:SRCAzimuth0DegKey];
+         aziEle.y = [[task defaults] floatForKey:SRCElevation0DegKey];
+     }
+     else if (index == 1){
+             aziEle.x = [[task defaults] floatForKey:SRCAzimuth1DegKey];
+             aziEle.y = [[task defaults] floatForKey:SRCElevation1DegKey];
+     }
 	return aziEle;
 }
 
@@ -231,8 +244,36 @@ long stimDoneAllBlocksGivenTemporalFreq(long location, long tindex) {
 	return (done);
 }
 
-extern float temporalFreqFromIndex(long index) {
-	return(MIN(maxAllowableTempFreq(),valueFromIndex(index, getTemporalFreqParams())));
+extern float temporalFreqFromIndex(long index, long stimIndex) {
+    bool coupleTemporalFreqs;
+    StimParams *params;
+    float temporalFreqHz;
+    
+    coupleTemporalFreqs = [[task defaults] integerForKey:SRCCoupleTemporalFreqsKey];
+    params = getTemporalFreqParams();
+    
+    if (stimIndex == 0) {
+         temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(index,params));
+    }
+    else {
+        if (coupleTemporalFreqs) {
+            if (params->levels != 3) {
+                NSLog(@"Need to have exactly 3 levels when temporal frequencies are coupled");
+                temporalFreqHz = 0;
+            }
+            else {
+                if (index == 0)
+                    temporalFreqHz = 0;
+                else if (index == 1)
+                    temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(2,params));
+                else
+                    temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(1,params));
+            }
+        }
+        else
+            temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(index,params));
+    }
+    return temporalFreqHz;
 }
 
 

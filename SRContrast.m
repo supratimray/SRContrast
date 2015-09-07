@@ -63,14 +63,20 @@ NSString *SRCStimJitterPCKey = @"SRCStimJitterPC";
 NSString *SRCInterstimMSKey = @"SRCInterstimMS";
 NSString *SRCInterstimJitterPCKey = @"SRCInterstimJitterPC";
 
-// Fixed Gabor Settings 
-NSString *SRCGaborSpatialFreqCPDKey = @"SRCGaborSpatialFreqCPD";
-NSString *SRCStimulusOrientationDegKey = @"SRCStimulusOrientationDeg";		
-NSString *SRCTargetOrientationDegKey = @"SRCTargetOrientationDeg";	
-NSString *SRCEccentricityDegKey = @"SRCEccentricityDeg";
-NSString *SRCPolarAngleDegKey = @"SRCPolarAngleDeg";
+// Gabor 0 Settings
+NSString *SRCSpatialFreq0CPDKey = @"SRCSpatialFreq0CPD";
+NSString *SRCStimulusOrientation0DegKey = @"SRCStimulusOrientation0Deg";
+NSString *SRCAzimuth0DegKey = @"SRCAzimuth0Deg";
+NSString *SRCElevation0DegKey = @"SRCElevation0Deg";
+
+// Gabor 1 Settings
+NSString *SRCSpatialFreq1CPDKey = @"SRCSpatialFreq1CPD";
+NSString *SRCStimulusOrientation1DegKey = @"SRCStimulusOrientation1Deg";
+NSString *SRCAzimuth1DegKey = @"SRCAzimuth1Deg";
+NSString *SRCElevation1DegKey = @"SRCElevation1Deg";
 
 // Variable Gabor Settings
+NSString *SRCChangeInOrientationDegKey = @"SRCChangeInOrientationDeg";
 NSString *SRCGaborRadiusDegKey = @"SRCGaborRadiusDeg";
 NSString *SRCGaborSigmaDegKey = @"SRCGaborSigmaDeg";
 
@@ -83,6 +89,9 @@ NSString *SRCTemporalFreqsKey = @"SRCTemporalFreqs";
 NSString *SRCMaxTemporalFreqHzKey = @"SRCMaxTemporalFreqHz";
 NSString *SRCTemporalFreqFactorKey = @"SRCTemporalFreqFactor";
 NSString *SRCGaborTemporalFreqHzKey = @"SRCGaborTemporalFreqHz";
+
+NSString *SRCCoupleTemporalFreqsKey = @"SRCCoupleTemporalFreqs";
+NSString *SRCUseStaircaseProcedureKey = @"SRCUseStaircaseProcedure";
 
 
 NSString *keyPaths[] = {@"values.SRCTries", @"values.SRCBlockLimit", @"values.SRCRespTimeMS", @"values.SRCStimDurationMS",
@@ -119,16 +128,21 @@ LLDataDef stimDescDef[] = {
 	{@"long",	@"type1", 1, offsetof(StimDesc, type1)},	
 	{@"long",	@"contrastIndex", 1, offsetof(StimDesc, contrastIndex)},
 	{@"long",	@"temporalFreqIndex", 1, offsetof(StimDesc, temporalFreqIndex)},
-	{@"float",	@"orientationDeg0", 1, offsetof(StimDesc, orientationDeg0)},
-	{@"float",	@"orientationDeg1", 1, offsetof(StimDesc, orientationDeg1)},
+	{@"float",	@"orientation0Deg", 1, offsetof(StimDesc, orientation0Deg)},
+	{@"float",	@"orientation1Deg", 1, offsetof(StimDesc, orientation1Deg)},
+    {@"float",	@"spatialFreq0CPD", 1, offsetof(StimDesc, spatialFreq0CPD)},
+    {@"float",	@"spatialFreq1CPD", 1, offsetof(StimDesc, spatialFreq1CPD)},
+    {@"float",	@"temporalFreq0Hz", 1, offsetof(StimDesc, temporalFreq0Hz)},
+    {@"float",	@"temporalFreq1Hz", 1, offsetof(StimDesc, temporalFreq1Hz)},
 	{nil}};
 LLDataDef trialDescDef[] = {
 	{@"boolean",@"catchTrial", 1, offsetof(TrialDesc, catchTrial)},
 	{@"boolean",@"instructTrial", 1, offsetof(TrialDesc, instructTrial)},
 	{@"long",	@"attendLoc", 1, offsetof(TrialDesc, attendLoc)},
 	{@"long",	@"numStim", 1, offsetof(TrialDesc, numStim)},
-	{@"float",	@"stimulusOrientation", 1, offsetof(TrialDesc, stimulusOrientation)},
-	{@"float",	@"targetOrientation", 1, offsetof(TrialDesc, targetOrientation)},
+	{@"float",	@"stimulusOrientation0", 1, offsetof(TrialDesc, stimulusOrientation0)},
+    {@"float",	@"stimulusOrientation1", 1, offsetof(TrialDesc, stimulusOrientation1)},
+	{@"float",	@"changeInOrientation", 1, offsetof(TrialDesc, changeInOrientation)},
 	{@"long",	@"targetIndex", 1, offsetof(TrialDesc, targetIndex)},
 	{@"long",	@"distIndex", 1, offsetof(TrialDesc, distIndex)},
 	{@"long",	@"targetContrastIndex", 1, offsetof(TrialDesc, targetContrastIndex)},
@@ -146,13 +160,18 @@ EventDefinition SRCEvents[] = {
 	{@"contrastParams",		sizeof(StimParams),		{@"struct", @"contrastParams", 1, 0, sizeof(StimParams), stimParamsDef}},
 	{@"temporalFreqParams", sizeof(StimParams),		{@"struct", @"temporalFreqParams", 1, 0, sizeof(StimParams), stimParamsDef}},
 	{@"gabor",				sizeof(Gabor),			{@"struct", @"gabor", 1, 0, sizeof(Gabor), gaborStructDef}},
-	{@"eccentricityDeg",	sizeof(float),			{@"float"}},
-	{@"polarAngleDeg",		sizeof(float),			{@"float"}},
+	{@"azimuth0Deg",        sizeof(float),			{@"float"}},
+    {@"azimuth1Deg",        sizeof(float),			{@"float"}},
+    {@"elevation0Deg",      sizeof(float),			{@"float"}},
+	{@"elevation1Deg",      sizeof(float),			{@"float"}},
 	
 	{@"sigmaDeg",			sizeof(float),			{@"float"}},
 	{@"radiusDeg",			sizeof(float),			{@"float"}},
-	{@"stimOrientationDeg", sizeof(float),			{@"float"}},
-	{@"spatialFreqCPD",		sizeof(float),			{@"float"}},
+	{@"stimOrientation0Deg", sizeof(float),			{@"float"}},
+    {@"stimOrientation1Deg", sizeof(float),			{@"float"}},
+	{@"spatialFreq0CPD",	sizeof(float),			{@"float"}},
+    {@"spatialFreq1CPD",	sizeof(float),			{@"float"}},
+    
 // Dialog parameters
 	{@"stimDurationMS",		sizeof(long),			{@"long"}},
 	{@"stimJitterPC",		sizeof(long),			{@"long"}},

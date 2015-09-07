@@ -603,11 +603,11 @@
 		}
 		if (minN == LONG_MAX) {
 			[reactPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Reaction Times (TF: %.1f)", 
-												temporalFreqFromIndex(temporalFreqIndex)]];
+												temporalFreqFromIndex(temporalFreqIndex,0)]];
 		}
 		else
 			[reactPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Reaction Times (TF: %.1f, n >= %ld)", 
-													temporalFreqFromIndex(temporalFreqIndex), minN]];
+													temporalFreqFromIndex(temporalFreqIndex,0), minN]];
 		
 		[reactPlot[temporalFreqIndex] setNeedsDisplay:YES];
 	}
@@ -672,11 +672,11 @@
 	
 	if (minN == LONG_MAX) {
 		[perfPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Performance (TF: %.1f)", 
-										   temporalFreqFromIndex(temporalFreqIndex)]];
+										   temporalFreqFromIndex(temporalFreqIndex,0)]];
 	}
 	else {
 		[perfPlot[temporalFreqIndex] setTitle:[NSString stringWithFormat:@"Performance (TF: %.1f, n >= %ld)", 
-											   temporalFreqFromIndex(temporalFreqIndex), minN]];
+											   temporalFreqFromIndex(temporalFreqIndex,0), minN]];
 	}
 	
 	[perfPlot[temporalFreqIndex] setNeedsDisplay:YES];

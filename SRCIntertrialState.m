@@ -13,8 +13,8 @@
 - (void)dumpTrial {
 
 	NSLog(@"\n catch instruct, attendLoc numStim targetIndex distIndex stimOrientation targetOrientation");
-	NSLog(@"%d %d %ld   %ld %ld %ld   %.1f %.1f\n", trial.catchTrial, trial.instructTrial, trial.attendLoc,
-		trial.numStim, trial.targetIndex, trial.distIndex, trial.stimulusOrientation, trial.targetOrientation);
+	NSLog(@"%d %d %ld   %ld %ld %ld   %.1f %.1f %.1f\n", trial.catchTrial, trial.instructTrial, trial.attendLoc,
+		trial.numStim, trial.targetIndex, trial.distIndex, trial.stimulusOrientation0, trial.stimulusOrientation1, trial.changeInOrientation);
 }
 
 - (void)stateAction {
@@ -62,8 +62,9 @@
 	
 	trial.attendLoc = blockStatus.attendLoc;
 	trial.instructTrial = blockStatus.instructsDone < [[task defaults] floatForKey:SRCNumInstructTrialsKey];
-	trial.stimulusOrientation = [[task defaults] floatForKey:SRCStimulusOrientationDegKey];
-	trial.targetOrientation = [[task defaults] floatForKey:SRCTargetOrientationDegKey];
+	trial.stimulusOrientation0 = [[task defaults] floatForKey:SRCStimulusOrientation0DegKey];
+    trial.stimulusOrientation1 = [[task defaults] floatForKey:SRCStimulusOrientation1DegKey];
+	trial.changeInOrientation = [[task defaults] floatForKey:SRCChangeInOrientationDegKey];
 	
 	// Pick a stimulus count for the target, using an exponential distribution
 

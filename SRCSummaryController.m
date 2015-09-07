@@ -321,7 +321,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 	switch (column) {
 		case kTemporalFreqColumn:
 			if (row < temporalFreqs) {
-				string = [NSString stringWithFormat: @"%.2f",temporalFreqFromIndex(row)];
+				string = [NSString stringWithFormat: @"%.2f",temporalFreqFromIndex(row,0)];
 			}
 			else {
 				string = @"Total: ";
@@ -410,7 +410,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 								(pBS->blocksDone) + 1, (pBS->blockLimit)];
             break;
 		case 3:
-			string = [NSString stringWithFormat:@"Num Stim: %ld, Target contrast: %.1f, TF: %.2f", trial.numStim, contrastFromIndex(trial.targetContrastIndex),temporalFreqFromIndex(trial.targetTemporalFreqIndex)];
+			string = [NSString stringWithFormat:@"Num Stim: %ld, Target contrast: %.1f, TF: %.2f", trial.numStim, contrastFromIndex(trial.targetContrastIndex),temporalFreqFromIndex(trial.targetTemporalFreqIndex,0)];
 			break;
 		case 4:
 			
