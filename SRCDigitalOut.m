@@ -5,6 +5,8 @@
 //  Modified by Supratim Ray on 9/10/08.
 //  Copyright 2008. All rights reserved.
 
+// We move away from the practice of putting in too many digital codes. The main reason is that unlike Blackrock, EEG data acquisition systems such as BrainProducts or EGI are not fast enough to catch digital words that change very quickly. So instead we put in only a few words, but also make sure that they are long enough. We also assume that a single Labjack/ITC18 is being used for data I/O.
+
 #import "SRCDigitalOut.h" 
 
 @implementation SRCDigitalOut
@@ -32,6 +34,22 @@
 		lock = [[NSLock alloc] init];
 	}
 	return self;
+}
+
+- (BOOL)outputEvent:(long)event sleepInMicrosec:(int)sleepTimeInMicrosec;
+{
+    if (digitalOutDevice == nil) {
+        return NO;
+    }
+    [lock lock];
+    [[task dataController] digitalOutputBits:((event | 0x8001))];
+    if (sleepTimeInMicrosec>0)
+        usleep(sleepTimeInMicrosec);
+    [[task dataController] digitalOutputBits:(kDefaultStateDigitOutCode | 0x0001)];
+    if (sleepTimeInMicrosec>0)
+        usleep(sleepTimeInMicrosec);
+    [lock unlock];
+    return YES;
 }
 
 - (BOOL)outputEvent:(long)event withData:(long)data;

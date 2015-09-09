@@ -21,6 +21,17 @@
 
 enum {kAttend0 = 0, kAttend1, kLocations};
 enum {kNullStim = 0, kValidStim, kTargetStim, kFrontPadding, kBackPadding};
+enum {  kDefaultStateDigitOutCode = 1,
+        kTrialStartDigitOutCode = 2,
+        kFixateDigitOutCode = 4,
+        kStimulusOnDigitOutCode = 8,
+        kStimulusOffDigitOutCode = 16,
+        kTargetOnDigitOutCode = 32,
+        kSaccadeDigitOutCode = 64,
+        kTrialEndDigitOutCode = 128};
+
+#define	kSleepInMicrosec	2000
+
 //enum {kV1ECoGExperiment = 0, kV1MicroElectrodeExperiment, kV4MicroElectrodeExperiment, kExperimentTypes};
 
 // False Alarm

@@ -24,8 +24,9 @@
 	
 	if ([[task defaults] boolForKey:SRCFixateKey]) {				// fixation required && fixated
 		[[task dataDoc] putEvent:@"fixate"];
-		[digitalOut outputEventName:@"fixate" withData:0x0000];
-		
+		//[digitalOut outputEventName:@"fixate" withData:0x0000];
+		[digitalOut outputEvent:kFixateDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+        
 		[scheduler schedule:@selector(updateCalibration) toTarget:self withObject:nil
 				delayMS:preCueMS * 0.8];
 

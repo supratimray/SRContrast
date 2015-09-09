@@ -40,12 +40,13 @@
     [[task collectorTimer] fire];
 	
 	[[task dataDoc] putEvent:@"trialStart" withData:&trial.targetIndex];
-	[digitalOut outputEventName:@"trialStart" withData:trial.targetIndex];
+//	[digitalOut outputEventName:@"trialStart" withData:trial.targetIndex];
+    [digitalOut outputEvent:kTrialStartDigitOutCode sleepInMicrosec:kSleepInMicrosec];
 	
 	[[task dataDoc] putEvent:@"trial" withData:&trial];
-	[digitalOut outputEventName:@"attendLoc" withData:(long)trial.attendLoc];
-	[digitalOut outputEventName:@"instructTrial" withData:(long)trial.instructTrial];
-	[digitalOut outputEventName:@"catchTrial" withData:(long)trial.catchTrial];
+//	[digitalOut outputEventName:@"attendLoc" withData:(long)trial.attendLoc];
+//	[digitalOut outputEventName:@"instructTrial" withData:(long)trial.instructTrial];
+//	[digitalOut outputEventName:@"catchTrial" withData:(long)trial.catchTrial];
 	
 	lValue = 0;
 	[[task dataDoc] putEvent:@"sampleZero" withData:&lValue];

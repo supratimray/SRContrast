@@ -13,8 +13,9 @@
 - (void)stateAction {
 
 	[[task dataDoc] putEvent:@"saccade"];
-	[digitalOut outputEventName:@"saccade" withData:0x0000];
-	
+	//[digitalOut outputEventName:@"saccade" withData:0x0000];
+	[digitalOut outputEvent:kSaccadeDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+    
 	expireTime = [LLSystemUtil timeFromNow:[[task defaults] integerForKey:SRCSaccadeTimeMSKey]];
 }
 

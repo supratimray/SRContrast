@@ -97,7 +97,7 @@ NSString *SRCUseStaircaseProcedureKey = @"SRCUseStaircaseProcedure";
 NSString *keyPaths[] = {@"values.SRCTries", @"values.SRCBlockLimit", @"values.SRCRespTimeMS", @"values.SRCStimDurationMS",
 					 @"values.SRCInterstimMS", @"values.SRCContrasts", @"values.SRCMaxContrast", @"values.SRCContrastFactor", 
 					 @"values.SRCTemporalFreqs", @"values.SRCMaxTemporalFreqHz", @"values.SRCTemporalFreqFactor",
-					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", nil};
+					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", @"values.SRCCoupleTemporalFreqs", nil};
 
 LLScheduleController	*scheduler = nil;
 SRCStimuli				*stimuli = nil;
@@ -544,6 +544,7 @@ NSTimeInterval	tooFastExpire;
 	NSString *key;
 	id newValue;
 	long longValue;
+    bool boolValue;
 
 	if (!tested) {
 		newValue = [change objectForKey:NSKeyValueChangeNewKey];
@@ -587,7 +588,13 @@ NSTimeInterval	tooFastExpire;
 		longValue = [defaults integerForKey:SRCPreferredLocKey];
 		[dataDoc putEvent:@"preferredLoc" withData:&longValue];
 		requestReset();
-	}	
+	}
+    else if ([key isEqualTo:SRCCoupleTemporalFreqsKey]){
+        boolValue = [defaults boolForKey:SRCCoupleTemporalFreqsKey];
+        if (boolValue) {
+            [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:SRCTemporalFreqsKey];
+        }
+    }
 }
 
 - (DisplayModeParam)requestedDisplayMode {

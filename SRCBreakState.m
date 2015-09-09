@@ -13,7 +13,7 @@
 
 - (void)stateAction {
 	[[task dataDoc] putEvent:@"break"];
-	[digitalOut outputEventName:@"break" withData:0x0000];
+	//[digitalOut outputEventName:@"break" withData:0x0000];
 	expireTime = [LLSystemUtil timeFromNow:[[task defaults] integerForKey:SRCSaccadeTimeMSKey]];
 }
 

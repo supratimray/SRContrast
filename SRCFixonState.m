@@ -14,7 +14,7 @@
 
     [stimuli setFixSpot:YES];
 	[[task dataDoc] putEvent:@"fixOn"];
-	[digitalOut outputEventName:@"fixOn" withData:0x0000];
+//	[digitalOut outputEventName:@"fixOn" withData:0x0000];
 	
 //    [[task synthDataDevice] doLeverDown];
     [[task synthDataDevice] setEyeTargetOn:NSMakePoint(0, 0)];

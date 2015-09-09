@@ -29,43 +29,43 @@ void announceEvents(void) {
 	
     floatValue = [[task defaults] floatForKey:SRCAzimuth0DegKey];
     [[task dataDoc] putEvent:@"azimuth0Deg" withData:(Ptr)&floatValue];
-    [digitalOut outputEventName:@"azimuth" withData:(long)(floatValue)];						// Put in the digital events
+//  [digitalOut outputEventName:@"azimuth" withData:(long)(floatValue)];						// Put in the digital events
     
     floatValue = [[task defaults] floatForKey:SRCAzimuth1DegKey];
     [[task dataDoc] putEvent:@"azimuth1Deg" withData:(Ptr)&floatValue];
-    [digitalOut outputEventName:@"azimuth" withData:(long)(floatValue)];						// Put in the digital events
+//  [digitalOut outputEventName:@"azimuth" withData:(long)(floatValue)];						// Put in the digital events
     
     floatValue = [[task defaults] floatForKey:SRCElevation0DegKey];
     [[task dataDoc] putEvent:@"elevation0Deg" withData:(Ptr)&floatValue];
-    [digitalOut outputEventName:@"elevation" withData:(long)(round(100*floatValue))];		// Put in the digital events
+//    [digitalOut outputEventName:@"elevation" withData:(long)(round(100*floatValue))];		// Put in the digital events
     
     floatValue = [[task defaults] floatForKey:SRCElevation1DegKey];
 	[[task dataDoc] putEvent:@"elevation1Deg" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"elevation" withData:(long)(round(100*floatValue))];		// Put in the digital events
+//	[digitalOut outputEventName:@"elevation" withData:(long)(round(100*floatValue))];		// Put in the digital events
 	
 	floatValue = [[task defaults] floatForKey:SRCGaborSigmaDegKey];
 	[[task dataDoc] putEvent:@"sigmaDeg" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"sigma" withData:(long)(100*floatValue)];						// Put in the digital events
+//	[digitalOut outputEventName:@"sigma" withData:(long)(100*floatValue)];						// Put in the digital events
 	
 	floatValue = [[task defaults] floatForKey:SRCGaborRadiusDegKey];
 	[[task dataDoc] putEvent:@"radiusDeg" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"radius" withData:(long)(100*floatValue)];						// Put in the digital events
+//	[digitalOut outputEventName:@"radius" withData:(long)(100*floatValue)];						// Put in the digital events
 	
 	floatValue = [[task defaults] floatForKey:SRCStimulusOrientation0DegKey];
 	[[task dataDoc] putEvent:@"stimOrientation0Deg" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"orientation" withData:(long)(floatValue)];					// Put in the digital events
+//	[digitalOut outputEventName:@"orientation" withData:(long)(floatValue)];					// Put in the digital events
 	
     floatValue = [[task defaults] floatForKey:SRCStimulusOrientation1DegKey];
     [[task dataDoc] putEvent:@"stimOrientation1Deg" withData:(Ptr)&floatValue];
-    [digitalOut outputEventName:@"orientation" withData:(long)(floatValue)];					// Put in the digital events
+//  [digitalOut outputEventName:@"orientation" withData:(long)(floatValue)];					// Put in the digital events
     
 	floatValue = [[task defaults] floatForKey:SRCSpatialFreq0CPDKey];
 	[[task dataDoc] putEvent:@"spatialFreq0CPD" withData:(Ptr)&floatValue];
-	[digitalOut outputEventName:@"spatialFrequency" withData:(long)(100*floatValue)];			// Put in the digital events
+//	[digitalOut outputEventName:@"spatialFrequency" withData:(long)(100*floatValue)];			// Put in the digital events
 	
     floatValue = [[task defaults] floatForKey:SRCSpatialFreq1CPDKey];
     [[task dataDoc] putEvent:@"spatialFreq1CPD" withData:(Ptr)&floatValue];
-    [digitalOut outputEventName:@"spatialFrequency" withData:(long)(100*floatValue)];			// Put in the digital events
+//  [digitalOut outputEventName:@"spatialFrequency" withData:(long)(100*floatValue)];			// Put in the digital events
     
     lValue = [[task defaults] integerForKey:SRCStimDurationMSKey];
 	[[task dataDoc] putEvent:@"stimDurationMS" withData:(Ptr)&lValue];

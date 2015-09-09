@@ -78,6 +78,14 @@
 	if (![[stimuli monitor] success]) {
 		trialCertify |= (0x1 << kCertifyVideoBit);
 	}
+    
+    [[task dataDoc] putEvent:@"trialCertify" withData:(void *)&trialCertify];
+    //[digitalOut outputEventName:@"trialCertify" withData:(long)(trialCertify)];
+    
+    [[task dataDoc] putEvent:@"trialEnd" withData:(void *)&eotCode];
+    //[digitalOut outputEventName:@"trialEnd" withData:(long)(eotCode)];
+    [digitalOut outputEvent:kTrialEndDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+    
 	expireTime = [LLSystemUtil timeFromNow:0];					// no delay, except for breaks (below)
 	
 	switch (eotCode) {
@@ -132,12 +140,6 @@
 			}
 		break;
 	}
-	
-	[[task dataDoc] putEvent:@"trialCertify" withData:(void *)&trialCertify];
-	[digitalOut outputEventName:@"trialCertify" withData:(long)(trialCertify)];
-	
-	[[task dataDoc] putEvent:@"trialEnd" withData:(void *)&eotCode];
-	[digitalOut outputEventName:@"trialEnd" withData:(long)(eotCode)];
 	
 	[[task synthDataDevice] setSpikeRateHz:spikeRateFromStimValue(0.0) atTime:[LLSystemUtil getTimeS]];
     [[task synthDataDevice] setEyeTargetOff];

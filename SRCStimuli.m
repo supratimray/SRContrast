@@ -520,12 +520,13 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 			}
 			[[task dataDoc] putEvent:@"stimulus" withData:&stimDesc];
 			[[task dataDoc] putEvent:@"stimulusOn" withData:&trialFrame];
-			
-			[digitalOut outputEventName:@"stimulusOn" withData:0x0000];
-			[digitalOut outputEventName:@"temporalFrequencyIndex" withData:(stimDesc.temporalFreqIndex)];
-			[digitalOut outputEventName:@"contrastIndex" withData:(stimDesc.contrastIndex)];
-			[digitalOut outputEventName:@"type0" withData:(stimDesc.type0)];
-			[digitalOut outputEventName:@"type1" withData:(stimDesc.type1)];
+            [digitalOut outputEvent:kStimulusOnDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+            
+//			[digitalOut outputEventName:@"stimulusOn" withData:0x0000];
+//			[digitalOut outputEventName:@"temporalFrequencyIndex" withData:(stimDesc.temporalFreqIndex)];
+//			[digitalOut outputEventName:@"contrastIndex" withData:(stimDesc.contrastIndex)];
+//			[digitalOut outputEventName:@"type0" withData:(stimDesc.type0)];
+//			[digitalOut outputEventName:@"type1" withData:(stimDesc.type1)];
 			
 			if ((attendLoc == 0 && stimDesc.type0 == kTargetStim) ||
 					(attendLoc == 1 && stimDesc.type1 == kTargetStim)) {
@@ -538,7 +539,8 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 		}
 		else if (trialFrame == stimDesc.stimOffFrame) {
 			[[task dataDoc] putEvent:@"stimulusOff" withData:&trialFrame];
-			[digitalOut outputEventName:@"stimulusOff" withData:0x0000];
+//			[digitalOut outputEventName:@"stimulusOff" withData:0x0000];
+            [digitalOut outputEvent:kStimulusOffDigitOutCode sleepInMicrosec:kSleepInMicrosec];
 			
 			if (++stimIndex >= [stimList count]) {
 				break;
