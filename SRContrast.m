@@ -93,11 +93,15 @@ NSString *SRCGaborTemporalFreqHzKey = @"SRCGaborTemporalFreqHz";
 NSString *SRCCoupleTemporalFreqsKey = @"SRCCoupleTemporalFreqs";
 NSString *SRCUseStaircaseProcedureKey = @"SRCUseStaircaseProcedure";
 
+NSString *SRCUseFeatureAttentionKey = @"SRCUseFeatureAttention";
+NSString *SRCFeatureAttentionOrientation0DegKey = @"SRCFeatureAttentionOrientation0Deg";
+NSString *SRCFeatureAttentionOrientation1DegKey = @"SRCFeatureAttentionOrientation1Deg";
 
 NSString *keyPaths[] = {@"values.SRCTries", @"values.SRCBlockLimit", @"values.SRCRespTimeMS", @"values.SRCStimDurationMS",
 					 @"values.SRCInterstimMS", @"values.SRCContrasts", @"values.SRCMaxContrast", @"values.SRCContrastFactor", 
 					 @"values.SRCTemporalFreqs", @"values.SRCMaxTemporalFreqHz", @"values.SRCTemporalFreqFactor",
-					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", @"values.SRCCoupleTemporalFreqs", nil};
+					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", @"values.SRCCoupleTemporalFreqs",
+                     @"values.SRCUseFeatureAttention", nil};
 
 LLScheduleController	*scheduler = nil;
 SRCStimuli				*stimuli = nil;
@@ -594,6 +598,11 @@ NSTimeInterval	tooFastExpire;
         if (boolValue) {
             [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:SRCTemporalFreqsKey];
         }
+    }
+    else if ([key isEqualTo:SRCUseFeatureAttentionKey]){
+        longValue = [defaults integerForKey:SRCUseFeatureAttentionKey];
+        [dataDoc putEvent:@"useFeatureAttentionFlag" withData:&longValue];
+        requestReset();
     }
 }
 

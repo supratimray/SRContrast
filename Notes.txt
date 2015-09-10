@@ -8,12 +8,23 @@ List of Modifications
 3. Use "Change in orientation" instead of target orientation.
 4. Temporal frequency could be run in the "flipped mode", in which there are exactly two non-zero TFs, with the first non-zero temporal frequency at Gabor 0 is coupled with the other non-zero TF at Gabor 1. There are a total of 3 TF pairs - {0,0}, {TF1,TF2} and {TF2,TF1}
 
-// Supratim Ray, 9 Sep 2015
+
+
+// Supratim Ray, 9 Sep 2015 - Commit 892dbe0
 
 1. Update digital outevents to have very few, but longish pulses. Should be able to run with a single ITC18 or Labjack.
 
+
+
+
+// Supratim Ray, 10 Sep 2015
+
+1. Feature Attention Mode. This requires two orientations - O1 and O2. Across blocks, base orientations will change in the following manner - {O1,O1},{O2,O1},{O1,O2},{O2,O2}.
+
+
+
 // To do
 
-Feature Attention Mode. This requires two orientations - O1 and O2. Across blocks, base orientations will change in the following manner - {O1,O1},{O2,O1},{O1,O2},{O2,O2}.
-
-Get Staircase option to work.
+1. Get Staircase option to work.
+2. The Feature attention condition with two orientations is sub-optimal for EEG, since different FA conditions are actually associated with different orientations in the two sides. Using a task like Cohen and Maunsell, 2011, Neuron, in which subjects have to detect either changes in orientation of spatial frequency across blocks, will be better.
+3. Make change to optionally run in a valid-invalid design. This design is available in GaborRFMap

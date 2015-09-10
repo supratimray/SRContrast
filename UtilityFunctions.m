@@ -280,6 +280,8 @@ extern float temporalFreqFromIndex(long index, long stimIndex) {
 void updateBlockStatus(void) {
 	
 	long contrasts, temporalFreqs, reps;
+    bool useFeatureAttentionFlag;
+    float featureAttentionOrientation0, featureAttentionOrientation1;
 	
 	contrasts = [[task defaults] integerForKey:SRCContrastsKey];
 	reps = [[task defaults] integerForKey:SRCStimRepsPerBlockKey];
@@ -290,6 +292,34 @@ void updateBlockStatus(void) {
 	blockStatus.blockLimit = [[task defaults] integerForKey:SRCBlockLimitKey];
 	
 	blockStatus.presentationsDoneThisLoc = stimDoneThisBlock(blockStatus.blocksDone, blockStatus.attendLoc);
+    
+    // If running the feature attentino block, set the stimulus orientations
+    useFeatureAttentionFlag = [[task defaults] boolForKey:SRCUseFeatureAttentionKey];
+    if (useFeatureAttentionFlag) {
+        if (blockStatus.presentationsDoneThisLoc == 0 && blockStatus.locsDoneThisBlock == 0) { // only at the start of each block
+            
+            featureAttentionOrientation0 = [[task defaults] floatForKey:SRCFeatureAttentionOrientation0DegKey];
+            featureAttentionOrientation1 = [[task defaults] floatForKey:SRCFeatureAttentionOrientation1DegKey];
+//          NSLog(@"Blocks, Remainder: %ld, %ld",blockStatus.blocksDone,(blockStatus.blocksDone % 4));
+            
+            if ((blockStatus.blocksDone % 4) == 0) {      // (Ori0, Ori0)
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation0 forKey:SRCStimulusOrientation0DegKey];
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation0 forKey:SRCStimulusOrientation1DegKey];
+            }
+            else if ((blockStatus.blocksDone % 4) == 1) { // (Ori0, Ori1)
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation0 forKey:SRCStimulusOrientation0DegKey];
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation1 forKey:SRCStimulusOrientation1DegKey];
+            }
+            else if ((blockStatus.blocksDone % 4) == 2) { // (Ori1, Ori0)
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation1 forKey:SRCStimulusOrientation0DegKey];
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation0 forKey:SRCStimulusOrientation1DegKey];
+            }
+            else if ((blockStatus.blocksDone % 4) == 3) { // (Ori1, Ori1)
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation1 forKey:SRCStimulusOrientation0DegKey];
+                [[NSUserDefaults standardUserDefaults] setFloat:featureAttentionOrientation1 forKey:SRCStimulusOrientation1DegKey];
+            }
+        }
+    }
 	
 	if (blockStatus.presentationsDoneThisLoc >= blockStatus.presentationsPerLoc) {
 		blockStatus.attendLoc = ((blockStatus.attendLoc + 1) % blockStatus.locsPerBlock); 

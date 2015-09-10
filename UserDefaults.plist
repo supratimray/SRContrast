@@ -62,6 +62,12 @@
 	<true/>
 	<key>SRCEyeXYFadeDots</key>
 	<true/>
+	<key>SRCUseFeatureAttention</key>
+	<false/>
+	<key>SRCFeatureAttentionOrientation0Deg</key>
+	<integer>0</integer>
+	<key>SRCFeatureAttentionOrientation1Deg</key>
+	<integer>90</integer>
 	<key>SRCFixGraceMS</key>
 	<integer>0</integer>
 	<key>SRCFixWindowWidthDeg</key>
@@ -174,6 +180,8 @@
 	<real>0</real>
 	<key>SRCTemporalFreqs</key>
 	<integer>4</integer>
+	<key>SRCTemporalFreqFactor</key>
+	<real>0.5</real>
 	<key>SRCTemporalModulationParam</key>
 	<integer>1</integer>
 	<key>SRCTemporalModulationType</key>

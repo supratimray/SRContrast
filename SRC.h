@@ -175,6 +175,11 @@ extern NSString *SRCGaborTemporalFreqHzKey;
 extern NSString *SRCCoupleTemporalFreqsKey;
 extern NSString *SRCUseStaircaseProcedureKey;
 
+// Feature Attention
+extern NSString *SRCUseFeatureAttentionKey;
+extern NSString *SRCFeatureAttentionOrientation0DegKey;
+extern NSString *SRCFeatureAttentionOrientation1DegKey;
+
 #import "SRCStimuli.h"
 
 BlockStatus						blockStatus;
