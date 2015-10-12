@@ -26,4 +26,3 @@ long			stimDoneAllBlocksGivenTemporalFreq(long location, long tindex);
 long			repsDoneAtLoc(long loc);
 void			updateBlockStatus(void);
 float			valueFromIndex(long index, StimParams *pStimParams);
-float			maxAllowableTempFreq(void);

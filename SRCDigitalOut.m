@@ -45,9 +45,9 @@
     [[task dataController] digitalOutputBits:((event | 0x8001))];
     if (sleepTimeInMicrosec>0)
         usleep(sleepTimeInMicrosec);
-    [[task dataController] digitalOutputBits:(kDefaultStateDigitOutCode | 0x0001)];
-    if (sleepTimeInMicrosec>0)
-        usleep(sleepTimeInMicrosec);
+//    [[task dataController] digitalOutputBits:(kDefaultStateDigitOutCode | 0x0001)];
+//    if (sleepTimeInMicrosec>0)
+//        usleep(sleepTimeInMicrosec);
     [lock unlock];
     return YES;
 }

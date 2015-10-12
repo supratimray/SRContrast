@@ -120,7 +120,10 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 
 - (void)insertStimSettingsAtIndex:(long)index trial:(TrialDesc *)pTrial type0:(long)type0 type1:(long)type1 contrastIndex:(long)cIndex temporalFreqIndex:(long)tIndex {
 	StimDesc stimDesc;
-	
+	float	distractorContrastRatio;
+    
+    distractorContrastRatio = [[task defaults] floatForKey:SRCDistractorContrastRatioKey];
+    
 	stimDesc.attendLoc = attendLoc;
 	stimDesc.type0 = type0;
 	stimDesc.orientation0Deg = (type0 == kTargetStim) ? (pTrial->stimulusOrientation0 +  pTrial->changeInOrientation) : pTrial->stimulusOrientation0;
@@ -134,6 +137,14 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
     stimDesc.temporalFreq0Hz = temporalFreqFromIndex(tIndex,0);
     stimDesc.temporalFreq1Hz = temporalFreqFromIndex(tIndex,1);
     
+    if (attendLoc==0) {
+        stimDesc.contrast0PC      = contrastFromIndex(cIndex);
+        stimDesc.contrast1PC      = distractorContrastRatio*contrastFromIndex(cIndex);
+    }
+    else {
+        stimDesc.contrast0PC      = distractorContrastRatio*contrastFromIndex(cIndex);
+        stimDesc.contrast1PC      = contrastFromIndex(cIndex);
+    }
     
 	if (index < 0 || index > [stimList count]) {
 		index = [stimList count];
@@ -146,28 +157,20 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 
 - (void)loadGaborsWithStimDesc:(StimDesc *)pSD {
 	long	index;
-	float	distractorContrastRatio;
 	NSPoint aziEle;
 	LLGabor *gabors[] = {gabor0, gabor1, nil};
-	
-	distractorContrastRatio = [[task defaults] floatForKey:SRCDistractorContrastRatioKey];
-	
 	
 	for (index = 0; gabors[index] != nil; index++) {
 		aziEle = azimuthAndElevationForStimIndex(index);
 		[gabors[index] directSetAzimuthDeg:aziEle.x elevationDeg:aziEle.y];
 		
-		if (index == (pSD->attendLoc)) 
-			[gabors[index] directSetContrast:contrastFromIndex(pSD->contrastIndex) / 100.0];
-		else
-			[gabors[index] directSetContrast:distractorContrastRatio*contrastFromIndex(pSD->contrastIndex) / 100.0];
-		
+		[gabors[index] directSetContrast:((index == 0) ? (pSD->contrast0PC / 100.0) : (pSD->contrast1PC / 100.0))];
 		[gabors[index] directSetDirectionDeg:((index == 0) ? pSD->orientation0Deg : pSD->orientation1Deg)];
         [gabors[index] directSetSpatialFreqCPD:((index == 0) ? pSD->spatialFreq0CPD : pSD->spatialFreq1CPD)];
         [gabors[index] directSetTemporalFreqHz:((index == 0) ? pSD->temporalFreq0Hz : pSD->temporalFreq1Hz)];
 		[gabors[index] setTemporalModulation:0.0];		// Counterphasing
 		
-		if (temporalFreqFromIndex(pSD->temporalFreqIndex,index) == maxAllowableTempFreq()) {
+		if (temporalFreqFromIndex(pSD->temporalFreqIndex,index) == [[task stimWindow] frameRateHz]/2) {
 			//NSLog(@"Changing phase to 90 degrees... ");
 			[gabors[index] directSetTemporalPhaseDeg:90.0];
 		}

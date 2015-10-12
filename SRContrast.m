@@ -132,6 +132,8 @@ LLDataDef stimDescDef[] = {
 	{@"long",	@"type1", 1, offsetof(StimDesc, type1)},	
 	{@"long",	@"contrastIndex", 1, offsetof(StimDesc, contrastIndex)},
 	{@"long",	@"temporalFreqIndex", 1, offsetof(StimDesc, temporalFreqIndex)},
+    {@"float",	@"contrast0PC", 1, offsetof(StimDesc, contrast0PC)},
+    {@"float",	@"contrast1PC", 1, offsetof(StimDesc, contrast1PC)},
 	{@"float",	@"orientation0Deg", 1, offsetof(StimDesc, orientation0Deg)},
 	{@"float",	@"orientation1Deg", 1, offsetof(StimDesc, orientation1Deg)},
     {@"float",	@"spatialFreq0CPD", 1, offsetof(StimDesc, spatialFreq0CPD)},
@@ -600,8 +602,8 @@ NSTimeInterval	tooFastExpire;
         }
     }
     else if ([key isEqualTo:SRCUseFeatureAttentionKey]){
-        longValue = [defaults integerForKey:SRCUseFeatureAttentionKey];
-        [dataDoc putEvent:@"useFeatureAttentionFlag" withData:&longValue];
+        boolValue = [defaults integerForKey:SRCUseFeatureAttentionKey];
+//        [dataDoc putEvent:@"useFeatureAttentionFlag" withData:&longValue];
         requestReset();
     }
 }

@@ -72,6 +72,8 @@ typedef struct StimDesc {
 	long	type1;					// 'type' of stimulus at location 1.
 	long	contrastIndex;			// Contrast index number of the stimulus at both locations
 	long	temporalFreqIndex;		// Temporal frequency of both stimuli
+    float   contrast0PC;
+    float   contrast1PC;
 	float	orientation0Deg;		// Orientation of the stimulus at location 0
 	float	orientation1Deg;		// Orientation of the stimulus at location 1
     float   spatialFreq0CPD;

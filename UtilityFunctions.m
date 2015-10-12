@@ -127,13 +127,6 @@ StimParams *getTemporalFreqParams(void) {
 	return &params;
 }
 
-float	maxAllowableTempFreq(void) {
-	// Modify later to get this value from display parameters
-	float value;
-	value = 50.0;
-	return value;
-}
-
 void putBlockDataEvents(long blocksDone, long location) {
 	long value;
 
@@ -253,7 +246,7 @@ extern float temporalFreqFromIndex(long index, long stimIndex) {
     params = getTemporalFreqParams();
     
     if (stimIndex == 0) {
-         temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(index,params));
+         temporalFreqHz = valueFromIndex(index,params);
     }
     else {
         if (coupleTemporalFreqs) {
@@ -265,14 +258,16 @@ extern float temporalFreqFromIndex(long index, long stimIndex) {
                 if (index == 0)
                     temporalFreqHz = 0;
                 else if (index == 1)
-                    temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(2,params));
+                    temporalFreqHz = valueFromIndex(2,params);
                 else
-                    temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(1,params));
+                    temporalFreqHz = valueFromIndex(1,params);
             }
         }
         else
-            temporalFreqHz = MIN(maxAllowableTempFreq(),valueFromIndex(index,params));
+            temporalFreqHz = valueFromIndex(index,params);
     }
+    
+    temporalFreqHz = MIN([[task stimWindow] frameRateHz]/2,temporalFreqHz);
     return temporalFreqHz;
 }
 
