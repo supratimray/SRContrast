@@ -189,7 +189,10 @@ EventDefinition SRCEvents[] = {
 	{@"tries",				sizeof(long),			{@"long"}},
 	{@"stimRepsPerBlock",	sizeof(long),			{@"long"}},
 	{@"preferredLoc",		sizeof(long),			{@"long"}},
-	
+    {@"precueDurationMS",	sizeof(long),			{@"long"}},
+	{@"precueJitterPC",     sizeof(long),			{@"long"}},
+    {@"cueDurationMS",      sizeof(long),			{@"long"}},
+    
 	{@"taskMode", 			sizeof(long),			{@"long"}},
 	{@"reset", 				sizeof(long),			{@"long"}},
 	

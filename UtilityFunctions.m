@@ -87,7 +87,14 @@ void announceEvents(void) {
 	[[task dataDoc] putEvent:@"stimRepsPerBlock" withData:(void *)&lValue];
 	lValue = [[task defaults] integerForKey:SRCPreferredLocKey];
 	[[task dataDoc] putEvent:@"preferredLoc" withData:(void *)&lValue];
-	
+
+// Cue Related Details
+    lValue = [[task defaults] integerForKey:SRCPrecueMSKey];
+    [[task dataDoc] putEvent:@"precueDurationMS" withData:(void *)&lValue];
+    lValue = [[task defaults] integerForKey:SRCPrecueJitterPCKey];
+    [[task dataDoc] putEvent:@"precueJitterPC" withData:(void *)&lValue];
+    lValue = [[task defaults] integerForKey:SRCCueMSKey];
+    [[task dataDoc] putEvent:@"cueDurationMS" withData:(void *)&lValue];
 }
 
  NSPoint azimuthAndElevationForStimIndex(long index) {
