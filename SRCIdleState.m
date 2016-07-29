@@ -24,7 +24,7 @@
 	if ([task mode] == kTaskEnding) {
 		return [[task stateSystem] stateNamed:@"SRCStop"];
     }
-	if (![task mode] == kTaskIdle) {
+	if ([task mode] != kTaskIdle) {
 		return [[task stateSystem] stateNamed:@"SRCIntertrial"];
     }
 	else {

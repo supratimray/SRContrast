@@ -105,9 +105,9 @@ void announceEvents(void) {
          aziEle.x = [[task defaults] floatForKey:SRCAzimuth0DegKey];
          aziEle.y = [[task defaults] floatForKey:SRCElevation0DegKey];
      }
-     else if (index == 1){
-             aziEle.x = [[task defaults] floatForKey:SRCAzimuth1DegKey];
-             aziEle.y = [[task defaults] floatForKey:SRCElevation1DegKey];
+     else {
+         aziEle.x = [[task defaults] floatForKey:SRCAzimuth1DegKey];
+         aziEle.y = [[task defaults] floatForKey:SRCElevation1DegKey];
      }
 	return aziEle;
 }
