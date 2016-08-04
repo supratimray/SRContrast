@@ -327,12 +327,12 @@ NSTimeInterval	tooFastExpire;
 	NSData *data;
 	
 	if ((data = [dataController dataOfType:@"eyeXData"]) != nil) {
-		data = [xFilter filteredValues:data];
+		//data = [xFilter filteredValues:data];
 		[dataDoc putEvent:@"eyeXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 		currentEyeUnits.x = *(short *)([data bytes] + [data length] - sizeof(short));
 	}
 	if ((data = [dataController dataOfType:@"eyeYData"]) != nil) {
-		data = [yFilter filteredValues:data];
+		//data = [yFilter filteredValues:data];
 		[dataDoc putEvent:@"eyeYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 		currentEyeUnits.y = *(short *)([data bytes] + [data length] - sizeof(short));
 		currentEyeDeg = [eyeCalibrator degPointFromUnitPoint:currentEyeUnits];
@@ -613,7 +613,7 @@ NSTimeInterval	tooFastExpire;
 
 - (DisplayModeParam)requestedDisplayMode {
 	displayMode.widthPix = 1280;
-	displayMode.heightPix = 768;
+	displayMode.heightPix = 720;
 	displayMode.pixelBits = 32;
 	displayMode.frameRateHz = 100;
 	return displayMode;

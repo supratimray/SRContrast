@@ -30,7 +30,7 @@ enum {  kDefaultStateDigitOutCode = 1,
         kSaccadeDigitOutCode = 64,
         kTrialEndDigitOutCode = 128};
 
-#define	kSleepInMicrosec	2000
+#define	kSleepInMicrosec	3000
 
 //enum {kV1ECoGExperiment = 0, kV1MicroElectrodeExperiment, kV4MicroElectrodeExperiment, kExperimentTypes};
 
