@@ -97,11 +97,14 @@ NSString *SRCUseFeatureAttentionKey = @"SRCUseFeatureAttention";
 NSString *SRCFeatureAttentionOrientation0DegKey = @"SRCFeatureAttentionOrientation0Deg";
 NSString *SRCFeatureAttentionOrientation1DegKey = @"SRCFeatureAttentionOrientation1Deg";
 
+NSString *SRCUseSingleStimulusPerTrialKey = @"SRCUseSingleStimulusPerTrial";
+
 NSString *keyPaths[] = {@"values.SRCTries", @"values.SRCBlockLimit", @"values.SRCRespTimeMS", @"values.SRCStimDurationMS",
 					 @"values.SRCInterstimMS", @"values.SRCContrasts", @"values.SRCMaxContrast", @"values.SRCContrastFactor", 
 					 @"values.SRCTemporalFreqs", @"values.SRCMaxTemporalFreqHz", @"values.SRCTemporalFreqFactor",
 					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", @"values.SRCCoupleTemporalFreqs",
-                     @"values.SRCUseFeatureAttention", nil};
+                     @"values.SRCUseFeatureAttention",
+                     @"values.SRCUseSingleStimulusPerTrial", nil};
 
 LLScheduleController	*scheduler = nil;
 SRCStimuli				*stimuli = nil;
@@ -607,6 +610,10 @@ NSTimeInterval	tooFastExpire;
     else if ([key isEqualTo:SRCUseFeatureAttentionKey]){
         boolValue = [defaults integerForKey:SRCUseFeatureAttentionKey];
 //        [dataDoc putEvent:@"useFeatureAttentionFlag" withData:&longValue];
+        requestReset();
+    }
+    else if ([key isEqualTo:SRCUseSingleStimulusPerTrialKey]){
+        boolValue = [defaults integerForKey:SRCUseSingleStimulusPerTrialKey];
         requestReset();
     }
 }

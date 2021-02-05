@@ -50,10 +50,13 @@
 }
 
 - (BOOL)selectTrial {
-	long index, maxTargetIndex, maxStimIndex, stimProbTimes10000;
+	long index, maxTargetIndex, maxStimIndex, stimProbTimes10000, minFrontPadStims;
 	long stimulusMS, interstimMS, reactMS; //rewardMS;
 	float maxTargetS, meanTargetS, meanRateHz, lambda;
-	
+    bool useSingleStimulusPerTrialFlag;
+    
+    useSingleStimulusPerTrialFlag = [[task defaults] boolForKey:SRCUseSingleStimulusPerTrialKey];
+    
 	updateBlockStatus();
 
 	if (blockStatus.blocksDone >= blockStatus.blockLimit) {
@@ -72,19 +75,22 @@
 	interstimMS = [[task defaults] integerForKey:SRCInterstimMSKey];
 	maxTargetS = [[task defaults] integerForKey:SRCMaxTargetMSKey] / 1000.0;
 	meanTargetS = [[task defaults] integerForKey:SRCMeanTargetMSKey] / 1000.0;
-	reactMS = [[task defaults] integerForKey:SRCRespTimeMSKey]; 
+	reactMS = [[task defaults] integerForKey:SRCRespTimeMSKey];
 
 	lambda = log(2.0) / meanTargetS;	// lambda of exponential distribution
 	stimProbTimes10000 = 10000.0 * (1.0 - exp(-lambda * (stimulusMS + interstimMS) / 1000.0)); 
 	meanRateHz = 1000.0 / (stimulusMS + interstimMS);
-	maxTargetIndex = maxTargetS * meanRateHz; 		// last position for target
-	maxStimIndex = (maxTargetS + reactMS / 1000.0) * meanRateHz + 1;
+    
+    minFrontPadStims = MAX(1,ceil([[task defaults] integerForKey:SRCStimLeadMSKey] / 1000.0 * meanRateHz));
+    
+	maxTargetIndex = (maxTargetS * meanRateHz) + minFrontPadStims; 		// last position for target
+	maxStimIndex = ((maxTargetS + reactMS / 1000.0) * meanRateHz + 1) + minFrontPadStims;
 	
 	[[task dataDoc] putEvent:@"maxTargetIndex" withData:(void *)&maxTargetIndex];
 
-	// Pick a count for the target stimulus, earliest possible position is 1 
+	// Pick a count for the target stimulus, earliest possible position is minFrontPadStims+1
 
-	for (index = 1; index < maxTargetIndex; index++) {
+	for (index = 1+minFrontPadStims; index < maxTargetIndex; index++) {
 		if ((rand() % 10000) < stimProbTimes10000) {
 			break;
 		}
@@ -104,15 +110,20 @@
 	
 	//NSLog(@"maxTargetIndex: %ld, maxStimIndex: %ld, targetIndex: %ld",maxTargetIndex, maxStimIndex, trial.targetIndex);
 
-	// Pick a count for the distractor stimulus, earliest possible position is 1
-	lambda = log(2.0) / (meanTargetS / [[task defaults] floatForKey:SRCRelDistractorProbKey]);	// lambda of exponential distribution
-	stimProbTimes10000 = 10000.0 * (1.0 - exp(-lambda * (stimulusMS + interstimMS) / 1000.0)); 
-	for (index = 1; index < maxTargetIndex; index++) {
-		if ((rand() % 10000) < stimProbTimes10000) {
-			break;
-		}
-	}
-	trial.distIndex = index;
+    if (useSingleStimulusPerTrialFlag) {
+        trial.distIndex = maxStimIndex + 1; // No distractor
+    }
+    else {
+        // Pick a count for the distractor stimulus, earliest possible position is minFrontPadStims+1
+        lambda = log(2.0) / (meanTargetS / [[task defaults] floatForKey:SRCRelDistractorProbKey]);	// lambda of exponential distribution
+        stimProbTimes10000 = 10000.0 * (1.0 - exp(-lambda * (stimulusMS + interstimMS) / 1000.0));
+        for (index = 1+minFrontPadStims; index < maxTargetIndex; index++) {
+            if ((rand() % 10000) < stimProbTimes10000) {
+                break;
+            }
+        }
+        trial.distIndex = index;
+    }
 	return YES;
 }
 

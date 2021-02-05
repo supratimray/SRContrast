@@ -64,6 +64,8 @@
 	<true/>
 	<key>SRCUseFeatureAttention</key>
 	<false/>
+	<key>SRCUseSingleStimulusPerTrial</key>
+	<true/>
 	<key>SRCFeatureAttentionOrientation0Deg</key>
 	<integer>0</integer>
 	<key>SRCFeatureAttentionOrientation1Deg</key>

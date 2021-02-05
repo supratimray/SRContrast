@@ -121,6 +121,14 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 - (void)insertStimSettingsAtIndex:(long)index trial:(TrialDesc *)pTrial type0:(long)type0 type1:(long)type1 contrastIndex:(long)cIndex temporalFreqIndex:(long)tIndex {
 	StimDesc stimDesc;
 	float	distractorContrastRatio;
+    bool    useSingleStimulusPerTrialFlag;
+    
+    useSingleStimulusPerTrialFlag = [[task defaults] boolForKey:SRCUseSingleStimulusPerTrialKey];
+    
+    if (useSingleStimulusPerTrialFlag) {
+        cIndex = cSingleStimulusPerTrial;
+        tIndex = tSingleStimulusPerTrial;
+    }
     
     distractorContrastRatio = [[task defaults] floatForKey:SRCDistractorContrastRatioKey];
     
@@ -220,6 +228,7 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 	long i;
 	StimDesc stimDesc;
 	BOOL insertDist;
+    bool useSingleStimulusPerTrialFlag;
 	
 	attendLoc = pTrial->attendLoc;
 	targetIndex = pTrial->targetIndex;
@@ -232,6 +241,7 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 	
 	stimRateHz = 1000.0 / ([[task defaults] integerForKey:SRCStimDurationMSKey] + [[task defaults] integerForKey:SRCInterstimMSKey]);
 	
+
 	/* To make our list, we will first build it up to targetIndex, and then add back padding characters.  However, targetIndex may be beyond
 	 stimListLength.  If that happens, set targetIndex to stimListLength so we can use it as a limit in either case. */
 	
@@ -272,7 +282,29 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 		}
 	}
 	[stimList removeAllObjects];
-	
+
+    useSingleStimulusPerTrialFlag = [[task defaults] boolForKey:SRCUseSingleStimulusPerTrialKey];
+    
+    if (useSingleStimulusPerTrialFlag) {     // Find a single stimulus that has not been done yet
+        if (remaining > 0) {
+            c = cInStart = (rand() % contrasts);
+            t = tInStart = (rand() % temporalFreqs);
+        
+            while (selectTable[c][t] != 0) {
+                c = (c + 1) % contrasts;
+                if (c == cInStart) {
+                    t = (t + 1) % temporalFreqs;
+                
+                    if (t == tInStart) {
+                        break;
+                    }
+                }
+            }
+            cSingleStimulusPerTrial = c;
+            tSingleStimulusPerTrial = t;
+        }
+    }
+    
 	/* The start of the list must begin with the number of requested padding stimuli.  These are simply taken at random from all stimuli.  We don't scramble
 	 this section, because it is random. The very first stimulus in the sequence is always a padding stimulus, and we make this highly visible. */
 
@@ -690,28 +722,52 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 - (long)stimuliAddedThisTrial {
 	StimDesc stimDesc;
 	long index;
-	long addedStim=0;   
+	long addedStim=0;
+    bool useSingleStimulusPerTrialFlag;
+    long atLeastOneValidStim = 0;
+    useSingleStimulusPerTrialFlag = [[task defaults] boolForKey:SRCUseSingleStimulusPerTrialKey];
 	
 	for (index = 0; index < [stimList count]; index++) {
 		[[stimList objectAtIndex:index] getValue:&stimDesc];
 		if (stimDesc.type0 == kValidStim && stimDesc.type1 == kValidStim) {
-			addedStim++;
+            if (useSingleStimulusPerTrialFlag) {
+                atLeastOneValidStim = 1;
+            }
+            else {
+                addedStim++;
+            }
 		}
 	}
-	return addedStim;
+    if (useSingleStimulusPerTrialFlag) {
+        return atLeastOneValidStim;
+    }
+    else {
+        return addedStim;
+    }
 }
 
 // Count the stimuli in the StimList as successfully completed
 - (void)tallyStimuli {
 	StimDesc stimDesc;
 	long index;
-	
+    bool useSingleStimulusPerTrialFlag;
+    bool atLeastOneValidStim = NO;
+    useSingleStimulusPerTrialFlag = [[task defaults] boolForKey:SRCUseSingleStimulusPerTrialKey];
+    
 	for (index = 0; index < [stimList count]; index++) {
 		[[stimList objectAtIndex:index] getValue:&stimDesc];
 		if (stimDesc.type0 == kValidStim && stimDesc.type1 == kValidStim) {
-			stimDone[stimDesc.attendLoc][stimDesc.contrastIndex][stimDesc.temporalFreqIndex]++;
+            if (useSingleStimulusPerTrialFlag) {
+                atLeastOneValidStim = YES;
+            }
+            else {
+                stimDone[stimDesc.attendLoc][stimDesc.contrastIndex][stimDesc.temporalFreqIndex]++;
+            }
 		}
 	}
+    
+    if (atLeastOneValidStim)
+        stimDone[stimDesc.attendLoc][cSingleStimulusPerTrial][tSingleStimulusPerTrial]++;
 }
 
 - (BOOL)targetPresented {

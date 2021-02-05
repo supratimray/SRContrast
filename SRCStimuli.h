@@ -23,6 +23,8 @@ SRCStimuli.h
 	BOOL					stimulusOn;
 	BOOL					targetPresented;
 	BOOL					distracterPresented;
+    long                    cSingleStimulusPerTrial;
+    long                    tSingleStimulusPerTrial;
 }
 
 - (DisplayParam *)displayParameters;

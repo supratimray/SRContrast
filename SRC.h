@@ -182,6 +182,10 @@ extern NSString *SRCUseFeatureAttentionKey;
 extern NSString *SRCFeatureAttentionOrientation0DegKey;
 extern NSString *SRCFeatureAttentionOrientation1DegKey;
 
+// Single Stimulus per Trial
+extern NSString *SRCUseSingleStimulusPerTrialKey;
+
+
 #import "SRCStimuli.h"
 
 BlockStatus						blockStatus;
