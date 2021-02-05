@@ -573,7 +573,7 @@ NSString *SRCSummaryWindowDistractedKey = @"SRCSummaryWindowDistracted";
 			[textField setStringValue:@"Wrong..."];
 			break;
 		case kEOTFailed:
-			[textField setStringValue:@"Failed..."];
+            [textField setStringValue:[NSString stringWithFormat:@"Failed... adding %ld stims", stimAdded]];
 			break;
 		case kEOTBroke:
 			[textField setStringValue:@"Broke..."];

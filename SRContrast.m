@@ -98,13 +98,15 @@ NSString *SRCFeatureAttentionOrientation0DegKey = @"SRCFeatureAttentionOrientati
 NSString *SRCFeatureAttentionOrientation1DegKey = @"SRCFeatureAttentionOrientation1Deg";
 
 NSString *SRCUseSingleStimulusPerTrialKey = @"SRCUseSingleStimulusPerTrial";
+NSString *SRCCountFailedTrialsKey = @"SRCCountFailedTrials";
 
 NSString *keyPaths[] = {@"values.SRCTries", @"values.SRCBlockLimit", @"values.SRCRespTimeMS", @"values.SRCStimDurationMS",
 					 @"values.SRCInterstimMS", @"values.SRCContrasts", @"values.SRCMaxContrast", @"values.SRCContrastFactor", 
 					 @"values.SRCTemporalFreqs", @"values.SRCMaxTemporalFreqHz", @"values.SRCTemporalFreqFactor",
 					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", @"values.SRCCoupleTemporalFreqs",
                      @"values.SRCUseFeatureAttention",
-                     @"values.SRCUseSingleStimulusPerTrial", nil};
+                     @"values.SRCUseSingleStimulusPerTrial",
+                     @"values.SRCCountFailedTrials", nil};
 
 LLScheduleController	*scheduler = nil;
 SRCStimuli				*stimuli = nil;
@@ -615,6 +617,10 @@ NSTimeInterval	tooFastExpire;
     else if ([key isEqualTo:SRCUseSingleStimulusPerTrialKey]){
         boolValue = [defaults integerForKey:SRCUseSingleStimulusPerTrialKey];
         requestReset();
+    }
+    else if ([key isEqualTo:SRCCountFailedTrialsKey]){
+            boolValue = [defaults integerForKey:SRCCountFailedTrialsKey];
+            requestReset();
     }
 }
 

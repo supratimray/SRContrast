@@ -66,6 +66,8 @@
 	<false/>
 	<key>SRCUseSingleStimulusPerTrial</key>
 	<true/>
+	<key>SRCCountFailedTrials</key>
+	<true/>
 	<key>SRCFeatureAttentionOrientation0Deg</key>
 	<integer>0</integer>
 	<key>SRCFeatureAttentionOrientation1Deg</key>

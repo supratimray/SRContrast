@@ -65,7 +65,8 @@
 	long trialCertify;
 	long stimAdded;			// Number of stim added if correct	
 	long breakPunishMS;
-	
+    bool countFailedTrialFlag;
+    
 	[stimuli stopAllStimuli];
 	[[task dataDoc] putEvent:@"fixOff"];
 	//[digitalOut outputEventName:@"fixOff" withData:0x0000];
@@ -87,7 +88,7 @@
     [digitalOut outputEvent:kTrialEndDigitOutCode sleepInMicrosec:kSleepInMicrosec];
     
 	expireTime = [LLSystemUtil timeFromNow:0];					// no delay, except for breaks (below)
-	
+    
 	switch (eotCode) {
 		case kEOTCorrect:
 			[task performSelector:@selector(doJuice:) withObject:self];
@@ -132,6 +133,18 @@
 			}
 			break;
 		case kEOTFailed:
+            countFailedTrialFlag = [[task defaults] boolForKey:SRCCountFailedTrialsKey];
+            
+            if (countFailedTrialFlag) {
+                if (trial.catchTrial) {
+                    stimAdded = 0;
+                }
+                else {
+                    [stimuli tallyStimuli];
+                    stimAdded = [stimuli stimuliAddedThisTrial];
+                }
+                [[task dataDoc] putEvent:@"stimAdded" withData:(void *)&stimAdded];
+            }
 		case kEOTBroke:
 		case kEOTDistracted:
 		default:

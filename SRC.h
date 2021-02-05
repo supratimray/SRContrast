@@ -182,8 +182,8 @@ extern NSString *SRCUseFeatureAttentionKey;
 extern NSString *SRCFeatureAttentionOrientation0DegKey;
 extern NSString *SRCFeatureAttentionOrientation1DegKey;
 
-// Single Stimulus per Trial
-extern NSString *SRCUseSingleStimulusPerTrialKey;
+extern NSString *SRCUseSingleStimulusPerTrialKey; // Single Stimulus per Trial
+extern NSString *SRCCountFailedTrialsKey;
 
 
 #import "SRCStimuli.h"
