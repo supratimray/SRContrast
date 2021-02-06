@@ -43,5 +43,5 @@
 - (IBAction)doRFMap:(id)sender;
 - (IBAction)doRunStop:(id)sender;
 - (SRCStimuli *)stimuli;
-
+- (void)updateChangeTable;
 @end

@@ -18,6 +18,12 @@
 	<integer>0</integer>
 	<key>SRCChangeInOrientationDeg</key>
 	<integer>30</integer>
+	<key>SRCChangeInOrientationTF1Deg</key>
+	<integer>40</integer>
+	<key>SRCChangeInOrientationTF2Deg</key>
+	<integer>50</integer>
+	<key>SRCNumChangesInOrientation</key>
+	<integer>1</integer>
 	<key>SRCContrastFactor</key>
 	<real>0.5</real>
 	<key>SRCContrast</key>

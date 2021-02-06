@@ -50,7 +50,7 @@
 }
 
 - (BOOL)selectTrial {
-	long index, maxTargetIndex, maxStimIndex, stimProbTimes10000, minFrontPadStims;
+	long index, maxTargetIndex, maxStimIndex, stimProbTimes10000, minFrontPadStims, randNum;
 	long stimulusMS, interstimMS, reactMS; //rewardMS;
 	float maxTargetS, meanTargetS, meanRateHz, lambda;
     bool useSingleStimulusPerTrialFlag;
@@ -68,7 +68,19 @@
 	trial.stimulusOrientation0 = [[task defaults] floatForKey:SRCStimulusOrientation0DegKey];
     trial.stimulusOrientation1 = [[task defaults] floatForKey:SRCStimulusOrientation1DegKey];
 	trial.changeInOrientation = [[task defaults] floatForKey:SRCChangeInOrientationDegKey];
-	
+	trial.changeInOrientationTF1 = [[task defaults] floatForKey:SRCChangeInOrientationDegTF1Key];
+    trial.changeInOrientationTF2 = [[task defaults] floatForKey:SRCChangeInOrientationDegTF2Key];
+    
+    // If numChanges > 1, just pick one value randomly for changeInOrientation, changeInOrientationTF1 and changeInOrientationTF2
+    
+    if (blockStatus.numChanges>1) {
+        
+        randNum = (rand() % blockStatus.numChanges);
+        trial.changeInOrientation = blockStatus.orientationChangeDegTF0[randNum];
+        trial.changeInOrientationTF1 = blockStatus.orientationChangeDegTF1[randNum];
+        trial.changeInOrientationTF2 = blockStatus.orientationChangeDegTF2[randNum];
+    }
+    
 	// Pick a stimulus count for the target, using an exponential distribution
 
 	stimulusMS = [[task defaults] integerForKey:SRCStimDurationMSKey]; 

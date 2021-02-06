@@ -77,6 +77,10 @@ NSString *SRCElevation1DegKey = @"SRCElevation1Deg";
 
 // Variable Gabor Settings
 NSString *SRCChangeInOrientationDegKey = @"SRCChangeInOrientationDeg";
+NSString *SRCChangeInOrientationDegTF1Key = @"SRCChangeInOrientationTF1Deg";
+NSString *SRCChangeInOrientationDegTF2Key = @"SRCChangeInOrientationTF2Deg";
+NSString *SRCNumChangesInOrientationKey = @"SRCNumChangesInOrientation";
+NSString *SRCChangeArrayKey = @"SRCChangeArray";
 NSString *SRCGaborRadiusDegKey = @"SRCGaborRadiusDeg";
 NSString *SRCGaborSigmaDegKey = @"SRCGaborSigmaDeg";
 
@@ -100,13 +104,23 @@ NSString *SRCFeatureAttentionOrientation1DegKey = @"SRCFeatureAttentionOrientati
 NSString *SRCUseSingleStimulusPerTrialKey = @"SRCUseSingleStimulusPerTrial";
 NSString *SRCCountFailedTrialsKey = @"SRCCountFailedTrials";
 
+// Keys for change array
+NSString *SRCTF0Key = @"TF0";
+NSString *SRCTF1Key = @"TF1";
+NSString *SRCTF2Key = @"TF2";
+
 NSString *keyPaths[] = {@"values.SRCTries", @"values.SRCBlockLimit", @"values.SRCRespTimeMS", @"values.SRCStimDurationMS",
 					 @"values.SRCInterstimMS", @"values.SRCContrasts", @"values.SRCMaxContrast", @"values.SRCContrastFactor", 
 					 @"values.SRCTemporalFreqs", @"values.SRCMaxTemporalFreqHz", @"values.SRCTemporalFreqFactor",
 					 @"values.SRCStimRepsPerBlock", @"values.SRCPreferredLoc", @"values.SRCCoupleTemporalFreqs",
                      @"values.SRCUseFeatureAttention",
                      @"values.SRCUseSingleStimulusPerTrial",
-                     @"values.SRCCountFailedTrials", nil};
+                     @"values.SRCCountFailedTrials",
+                     @"values.SRCNumChangesInOrientation",
+                     @"values.SRCChangeInOrientationDeg",
+                     @"values.SRCChangeInOrientationTF1Deg",
+                     @"values.SRCChangeInOrientationTF2Deg",
+                     @"values.SRCChangeArray", nil};
 
 LLScheduleController	*scheduler = nil;
 SRCStimuli				*stimuli = nil;
@@ -123,6 +137,10 @@ LLDataDef blockStatusDef[] = {
 	{@"long",	@"locsDoneThisBlock", 1, offsetof(BlockStatus, locsDoneThisBlock)},	
 	{@"long",	@"blockLimit", 1, offsetof(BlockStatus, blockLimit)},
 	{@"long",	@"blocksDone", 1, offsetof(BlockStatus, blocksDone)},
+    {@"long",	@"numChanges", 1, offsetof(BlockStatus, numChanges)},
+    {@"float",	@"orientationChangeDegTF0", kMaxOriChanges, offsetof(BlockStatus, orientationChangeDegTF0)},
+    {@"float",	@"orientationChangeDegTF1", kMaxOriChanges, offsetof(BlockStatus, orientationChangeDegTF1)},
+    {@"float",	@"orientationChangeDegTF2", kMaxOriChanges, offsetof(BlockStatus, orientationChangeDegTF2)},
 	{nil}};
 LLDataDef stimParamsDef[] = {
 	{@"long",	@"levels", 1, offsetof(StimParams, levels)},
@@ -154,6 +172,8 @@ LLDataDef trialDescDef[] = {
 	{@"float",	@"stimulusOrientation0", 1, offsetof(TrialDesc, stimulusOrientation0)},
     {@"float",	@"stimulusOrientation1", 1, offsetof(TrialDesc, stimulusOrientation1)},
 	{@"float",	@"changeInOrientation", 1, offsetof(TrialDesc, changeInOrientation)},
+    {@"float",	@"changeInOrientationTF1", 1, offsetof(TrialDesc, changeInOrientationTF1)},
+    {@"float",	@"changeInOrientationTF2", 1, offsetof(TrialDesc, changeInOrientationTF2)},
 	{@"long",	@"targetIndex", 1, offsetof(TrialDesc, targetIndex)},
 	{@"long",	@"distIndex", 1, offsetof(TrialDesc, distIndex)},
 	{@"long",	@"targetContrastIndex", 1, offsetof(TrialDesc, targetContrastIndex)},
@@ -622,6 +642,13 @@ NSTimeInterval	tooFastExpire;
             boolValue = [defaults integerForKey:SRCCountFailedTrialsKey];
             requestReset();
     }
+    else if ([key isEqualTo:SRCNumChangesInOrientationKey] || [key isEqualTo:SRCChangeInOrientationDegKey] || [key isEqualTo:SRCChangeInOrientationDegTF1Key] || [key isEqualTo:SRCChangeInOrientationDegTF2Key]) {
+        [self updateChangeTable];
+        requestReset();
+    }
+    else if ([key isEqualTo:SRCChangeArrayKey]){
+        requestReset();
+    }
 }
 
 - (DisplayModeParam)requestedDisplayMode {
@@ -671,4 +698,57 @@ NSTimeInterval	tooFastExpire;
 - (SRCStimuli *)stimuli {
 	return stimuli;
 }
+
+- (void)updateChangeTable;
+{
+    long index, changes, oldChanges;
+    float maxChange, maxChangeTF1, maxChangeTF2;
+    float newValue, newValueTF1, newValueTF2;
+    NSMutableArray *changeArray;
+    NSMutableDictionary *changeEntry;
+    
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:@"values.SRCChangeArray"];
+    changeArray = [NSMutableArray arrayWithArray:[defaults arrayForKey:SRCChangeArrayKey]];
+    oldChanges = [changeArray count];
+    changes = [defaults integerForKey:SRCNumChangesInOrientationKey];
+    
+    if (oldChanges > changes) {
+        [changeArray removeObjectsInRange:NSMakeRange(changes, oldChanges - changes)];
+    }
+    else if (changes > oldChanges) {
+        changeEntry = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                       [NSNumber numberWithFloat:10.0], SRCTF0Key,
+                       [NSNumber numberWithFloat:10.0], SRCTF1Key,
+                       [NSNumber numberWithFloat:10.0], SRCTF2Key,
+                       nil];
+        for (index = oldChanges; index < changes; index++) {
+            [changeArray addObject:changeEntry];
+        }
+    }
+
+    maxChange = [defaults floatForKey:SRCChangeInOrientationDegKey];
+    maxChangeTF1 = [defaults floatForKey:SRCChangeInOrientationDegTF1Key];
+    maxChangeTF2 = [defaults floatForKey:SRCChangeInOrientationDegTF2Key];
+
+    for (index = 0; index < changes; index++) {
+            newValue = maxChange/(pow(2,changes-index-1));
+            newValueTF1 = maxChangeTF1/(pow(2,changes-index-1));
+            newValueTF2 = maxChangeTF2/(pow(2,changes-index-1));
+        
+            changeEntry = [NSMutableDictionary dictionaryWithCapacity:1];
+            [changeEntry setDictionary:[changeArray objectAtIndex:index]];
+            [changeEntry setObject:[NSNumber numberWithFloat:newValue] forKey:SRCTF0Key];
+            [changeEntry setObject:[NSNumber numberWithFloat:newValueTF1] forKey:SRCTF1Key];
+            [changeEntry setObject:[NSNumber numberWithFloat:newValueTF2] forKey:SRCTF2Key];
+            [changeArray replaceObjectAtIndex:index withObject:changeEntry];
+    }
+    
+    [defaults setObject:changeArray forKey:SRCChangeArrayKey];
+    updateBlockStatus();
+    [[task dataDoc] putEvent:@"blockStatus" withData:&blockStatus];
+    requestReset();
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.SRCChangeArray" options:NSKeyValueObservingOptionNew context:nil];
+    
+}
+
 @end

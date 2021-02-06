@@ -122,22 +122,34 @@ NSString *stimulusMonitorID = @"SRContrast Stimulus";
 	StimDesc stimDesc;
 	float	distractorContrastRatio;
     bool    useSingleStimulusPerTrialFlag;
+    float changeInOrientation;
     
     useSingleStimulusPerTrialFlag = [[task defaults] boolForKey:SRCUseSingleStimulusPerTrialKey];
+    changeInOrientation = pTrial->changeInOrientation; // by default, for TF=0
     
     if (useSingleStimulusPerTrialFlag) {
         cIndex = cSingleStimulusPerTrial;
         tIndex = tSingleStimulusPerTrial;
+        
+        // Use different orientations only in this case
+        if (tIndex==1) {
+            changeInOrientation = pTrial->changeInOrientationTF1;
+        }
+        else if (tIndex==2) {
+            changeInOrientation = pTrial->changeInOrientationTF2;
+        }
     }
     
     distractorContrastRatio = [[task defaults] floatForKey:SRCDistractorContrastRatioKey];
     
 	stimDesc.attendLoc = attendLoc;
 	stimDesc.type0 = type0;
-	stimDesc.orientation0Deg = (type0 == kTargetStim) ? (pTrial->stimulusOrientation0 +  pTrial->changeInOrientation) : pTrial->stimulusOrientation0;
+	
+    stimDesc.orientation0Deg = (type0 == kTargetStim) ? (pTrial->stimulusOrientation0 + changeInOrientation) : pTrial->stimulusOrientation0;
 	stimDesc.type1 = type1;
-	stimDesc.orientation1Deg = (type1 == kTargetStim) ? (pTrial->stimulusOrientation1 +  pTrial->changeInOrientation) : pTrial->stimulusOrientation1;
-	stimDesc.contrastIndex = cIndex;
+	stimDesc.orientation1Deg = (type1 == kTargetStim) ? (pTrial->stimulusOrientation1 + changeInOrientation) : pTrial->stimulusOrientation1;
+	
+    stimDesc.contrastIndex = cIndex;
 	stimDesc.temporalFreqIndex = tIndex;
 	
     stimDesc.spatialFreq0CPD = [[task defaults] floatForKey:SRCSpatialFreq0CPDKey];
@@ -302,7 +314,16 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
             }
             cSingleStimulusPerTrial = c;
             tSingleStimulusPerTrial = t;
+            
+            // Only when a single stimulus needs to be presented, use potentially different orientations
+            if (t==1) {
+                changeInOrientation = pTrial->changeInOrientationTF1;
+            }
+            else if (t==2) {
+                changeInOrientation = pTrial->changeInOrientationTF2;
+            }
         }
+        NSLog(@"%ld %ld %f", cSingleStimulusPerTrial,tSingleStimulusPerTrial,changeInOrientation);
     }
     
 	/* The start of the list must begin with the number of requested padding stimuli.  These are simply taken at random from all stimuli.  We don't scramble
@@ -423,11 +444,11 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 			
 			if (attendLoc == kAttend0) {
 				stimDesc.type1 = kTargetStim;
-				stimDesc.orientation1Deg = (pTrial->stimulusOrientation1 + pTrial->changeInOrientation);
+				stimDesc.orientation1Deg = (pTrial->stimulusOrientation1 + changeInOrientation);
 			}
 			else {
 				stimDesc.type0 = kTargetStim;
-				stimDesc.orientation0Deg = (pTrial->stimulusOrientation0 + pTrial->changeInOrientation);
+				stimDesc.orientation0Deg = (pTrial->stimulusOrientation0 + changeInOrientation);
 			}
 			[stimList replaceObjectAtIndex:distIndex 
 								withObject:[NSValue valueWithBytes:&stimDesc objCType:@encode(StimDesc)]];
@@ -443,10 +464,10 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 				[[stimList objectAtIndex:i] getValue:&stimDesc];
 			
 				if (stimDesc.attendLoc == kAttend0) {
-					stimDesc.orientation0Deg = (pTrial->stimulusOrientation0 + pTrial->changeInOrientation);
+					stimDesc.orientation0Deg = (pTrial->stimulusOrientation0 + changeInOrientation);
 				}
 				else {
-					stimDesc.orientation1Deg = (pTrial->stimulusOrientation1 + pTrial->changeInOrientation);
+					stimDesc.orientation1Deg = (pTrial->stimulusOrientation1 + changeInOrientation);
 				}
 				[stimList replaceObjectAtIndex:i 
 									withObject:[NSValue valueWithBytes:&stimDesc objCType:@encode(StimDesc)]];

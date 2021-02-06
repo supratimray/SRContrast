@@ -31,6 +31,7 @@ enum {  kDefaultStateDigitOutCode = 1,
         kTrialEndDigitOutCode = 128};
 
 #define	kSleepInMicrosec	3000
+#define kMaxOriChanges      8
 
 //enum {kV1ECoGExperiment = 0, kV1MicroElectrodeExperiment, kV4MicroElectrodeExperiment, kExperimentTypes};
 
@@ -62,6 +63,11 @@ typedef struct BlockStatus {
 	long locsDoneThisBlock;									// number of locations completed, current block	
 	long blockLimit;										// number of blocks before stopping
 	long blocksDone;										// number of blocks completed
+    
+    long    numChanges;
+    float	orientationChangeDegTF0[kMaxOriChanges];
+    float	orientationChangeDegTF1[kMaxOriChanges];
+    float	orientationChangeDegTF2[kMaxOriChanges];
 } BlockStatus;
 
 typedef struct StimDesc {
@@ -90,6 +96,8 @@ typedef struct TrialDesc {
 	float	stimulusOrientation0;		// Orientation of the stimulus
     float	stimulusOrientation1;		// Orientation of the stimulus
 	float	changeInOrientation;			// Change in orientation in the target (and distractor)
+    float	changeInOrientationTF1;			// Change in orientation in the target for TF1 if needed
+    float	changeInOrientationTF2;			// Change in orientation in the target for TF2 if needed
 	long	targetIndex;				// Position of the target stimulus
 	long	distIndex;					// Position of the distractor stimulus
 	long	targetContrastIndex;		// Contrast index of the target (and distractor)
@@ -161,6 +169,10 @@ extern NSString *SRCElevation1DegKey;
 
 // Variable Gabor Settings
 extern NSString *SRCChangeInOrientationDegKey;
+extern NSString *SRCChangeInOrientationDegTF1Key;
+extern NSString *SRCChangeInOrientationDegTF2Key;
+extern NSString *SRCNumChangesInOrientationKey;
+extern NSString *SRCChangeArrayKey;
 extern NSString *SRCGaborRadiusDegKey;
 extern NSString *SRCGaborSigmaDegKey;
 
@@ -185,6 +197,9 @@ extern NSString *SRCFeatureAttentionOrientation1DegKey;
 extern NSString *SRCUseSingleStimulusPerTrialKey; // Single Stimulus per Trial
 extern NSString *SRCCountFailedTrialsKey;
 
+extern NSString *SRCTF0Key;
+extern NSString *SRCTF1Key;
+extern NSString *SRCTF2Key;
 
 #import "SRCStimuli.h"
 

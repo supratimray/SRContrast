@@ -281,9 +281,11 @@ extern float temporalFreqFromIndex(long index, long stimIndex) {
 
 void updateBlockStatus(void) {
 	
-	long contrasts, temporalFreqs, reps;
+	long index, contrasts, temporalFreqs, reps;
     bool useFeatureAttentionFlag;
     float featureAttentionOrientation0, featureAttentionOrientation1;
+    NSArray *changeArray;
+    NSDictionary *entryDict;
 	
 	contrasts = [[task defaults] integerForKey:SRCContrastsKey];
 	reps = [[task defaults] integerForKey:SRCStimRepsPerBlockKey];
@@ -335,6 +337,15 @@ void updateBlockStatus(void) {
 		
 		//NSLog(@"blocks done: %ld, locsdonethisblock: %ld, attendLoc: %ld",blockStatus.blocksDone,blockStatus.locsDoneThisBlock, blockStatus.attendLoc);
 	}
+    
+    blockStatus.numChanges = [[task defaults] integerForKey:SRCNumChangesInOrientationKey];
+    changeArray = [[task defaults] arrayForKey:SRCChangeArrayKey];
+    for (index = 0; index < blockStatus.numChanges; index++) {
+        entryDict = [changeArray objectAtIndex:index];
+        (blockStatus.orientationChangeDegTF0)[index] = [[entryDict valueForKey:SRCTF0Key] floatValue];
+        (blockStatus.orientationChangeDegTF1)[index] = [[entryDict valueForKey:SRCTF1Key] floatValue];
+        (blockStatus.orientationChangeDegTF2)[index] = [[entryDict valueForKey:SRCTF2Key] floatValue];
+    }
 }
 	
 float valueFromIndex(long index, StimParams *pStimParams)

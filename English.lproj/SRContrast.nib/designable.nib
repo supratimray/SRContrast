@@ -825,7 +825,7 @@
                         </connections>
                     </textField>
                     <textField toolTip="Maximum contrast used" verticalHuggingPriority="750" id="1177">
-                        <rect key="frame" x="76" y="117" width="78" height="22"/>
+                        <rect key="frame" x="76" y="125" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4625">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="1178">
@@ -845,7 +845,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1179">
-                        <rect key="frame" x="29" y="117" width="39" height="17"/>
+                        <rect key="frame" x="31" y="125" width="39" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Max" id="4626">
                             <font key="font" metaFont="system"/>
@@ -854,7 +854,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1180">
-                        <rect key="frame" x="18" y="83" width="48" height="17"/>
+                        <rect key="frame" x="20" y="102" width="48" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Factor" id="4627">
                             <font key="font" metaFont="system"/>
@@ -863,7 +863,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Factor used for each step in contrast" verticalHuggingPriority="750" id="1181">
-                        <rect key="frame" x="76" y="81" width="78" height="22"/>
+                        <rect key="frame" x="76" y="100" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4628">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.000" negativeFormat="-0.000" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="1182">
@@ -895,7 +895,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Azimuth of Gabor 0" verticalHuggingPriority="750" id="1184">
-                        <rect key="frame" x="418" y="341" width="78" height="22"/>
+                        <rect key="frame" x="418" y="348" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4630">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="1185">
@@ -915,7 +915,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1186">
-                        <rect key="frame" x="287" y="341" width="117" height="17"/>
+                        <rect key="frame" x="287" y="348" width="117" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Azimuth (deg):" id="4631">
                             <font key="font" metaFont="system"/>
@@ -924,7 +924,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="4758">
-                        <rect key="frame" x="379" y="252" width="117" height="17"/>
+                        <rect key="frame" x="379" y="269" width="117" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Orientation 0" id="4759">
                             <font key="font" metaFont="system"/>
@@ -933,7 +933,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="4760">
-                        <rect key="frame" x="465" y="252" width="117" height="17"/>
+                        <rect key="frame" x="465" y="269" width="117" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Orientation 1" id="4761">
                             <font key="font" metaFont="system"/>
@@ -942,7 +942,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Elevation of Gabor 0" verticalHuggingPriority="750" id="1187">
-                        <rect key="frame" x="418" y="313" width="78" height="22"/>
+                        <rect key="frame" x="418" y="325" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4632">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="1188">
@@ -961,7 +961,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1189">
-                        <rect key="frame" x="287" y="315" width="117" height="17"/>
+                        <rect key="frame" x="287" y="327" width="117" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Elevation (deg):" id="4633">
                             <font key="font" metaFont="system"/>
@@ -970,7 +970,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Sigma (width) of the Gabor" verticalHuggingPriority="750" id="1190">
-                        <rect key="frame" x="416" y="269" width="78" height="22"/>
+                        <rect key="frame" x="416" y="284" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4634">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.00" negativeFormat="-0.00" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="1191">
@@ -990,7 +990,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1192">
-                        <rect key="frame" x="416" y="293" width="82" height="17"/>
+                        <rect key="frame" x="416" y="308" width="82" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Sigma" id="4635">
                             <font key="font" metaFont="system"/>
@@ -999,7 +999,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1193">
-                        <rect key="frame" x="502" y="293" width="82" height="17"/>
+                        <rect key="frame" x="502" y="308" width="82" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Radius" id="4636">
                             <font key="font" metaFont="system"/>
@@ -1008,7 +1008,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Radius (limit) of the Gabor" verticalHuggingPriority="750" id="1194">
-                        <rect key="frame" x="502" y="269" width="78" height="22"/>
+                        <rect key="frame" x="502" y="284" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4637">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.00" negativeFormat="-0.00" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="1195">
@@ -1055,7 +1055,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1214">
-                        <rect key="frame" x="7" y="41" width="59" height="34"/>
+                        <rect key="frame" x="8" y="63" width="59" height="34"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Steps/Octave" id="4640">
                             <font key="font" metaFont="system"/>
@@ -1064,7 +1064,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Factor used for each step in current" verticalHuggingPriority="750" id="1215">
-                        <rect key="frame" x="76" y="49" width="78" height="22"/>
+                        <rect key="frame" x="76" y="69" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4641">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.00" negativeFormat="-0.00" hasThousandSeparators="NO" thousandSeparator="," id="1216">
@@ -1212,7 +1212,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Orientation 0" verticalHuggingPriority="750" id="1308">
-                        <rect key="frame" x="418" y="368" width="78" height="22"/>
+                        <rect key="frame" x="418" y="372" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4652">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="1314">
@@ -1236,7 +1236,7 @@
                         </connections>
                     </textField>
                     <textField toolTip="Azimuth of Gabor 1" verticalHuggingPriority="750" id="4697">
-                        <rect key="frame" x="504" y="343" width="78" height="22"/>
+                        <rect key="frame" x="504" y="350" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4707">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="4708">
@@ -1256,7 +1256,7 @@
                         </connections>
                     </textField>
                     <textField toolTip="Elevation of Gabor 1" verticalHuggingPriority="750" id="4698">
-                        <rect key="frame" x="504" y="315" width="78" height="22"/>
+                        <rect key="frame" x="504" y="327" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4705">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="4706">
@@ -1294,7 +1294,7 @@
                         </connections>
                     </textField>
                     <textField toolTip="Orientation 1" verticalHuggingPriority="750" id="4700">
-                        <rect key="frame" x="504" y="370" width="78" height="22"/>
+                        <rect key="frame" x="504" y="374" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4701">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="4702">
@@ -1318,7 +1318,7 @@
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1309">
-                        <rect key="frame" x="253" y="366" width="152" height="21"/>
+                        <rect key="frame" x="253" y="370" width="152" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Stim. Orient. (deg):" id="4653">
                             <font key="font" metaFont="system"/>
@@ -1444,7 +1444,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="2242">
-                        <rect key="frame" x="156" y="120" width="21" height="17"/>
+                        <rect key="frame" x="158" y="128" width="21" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="%" id="4663">
                             <font key="font" metaFont="system"/>
@@ -1453,7 +1453,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="2244">
-                        <rect key="frame" x="315" y="269" width="87" height="22"/>
+                        <rect key="frame" x="315" y="284" width="87" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Size (deg): " id="4664">
                             <font key="font" metaFont="system"/>
@@ -1462,7 +1462,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Maximum contrast used" verticalHuggingPriority="750" id="2825">
-                        <rect key="frame" x="178" y="117" width="87" height="22"/>
+                        <rect key="frame" x="178" y="125" width="87" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4665">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="2827">
@@ -1481,7 +1481,7 @@
                         </connections>
                     </textField>
                     <textField toolTip="Factor used for each step in contrast" verticalHuggingPriority="750" id="2836">
-                        <rect key="frame" x="178" y="83" width="87" height="22"/>
+                        <rect key="frame" x="178" y="100" width="87" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4666">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.000" negativeFormat="-0.000" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="2838">
@@ -1528,7 +1528,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="4409">
-                        <rect key="frame" x="265" y="120" width="32" height="17"/>
+                        <rect key="frame" x="267" y="128" width="32" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Hz" id="4669">
                             <font key="font" metaFont="system"/>
@@ -1537,7 +1537,7 @@
                         </textFieldCell>
                     </textField>
                     <button toolTip="Toggles fixation requirement" id="4719">
-                        <rect key="frame" x="176" y="51" width="121" height="18"/>
+                        <rect key="frame" x="150" y="51" width="121" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Couple TF1,TF2" bezelStyle="regularSquare" imagePosition="right" alignment="left" inset="2" id="4720">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1548,7 +1548,7 @@
                         </connections>
                     </button>
                     <button toolTip="Use Feature Attention" id="4747">
-                        <rect key="frame" x="274" y="230" width="129" height="18"/>
+                        <rect key="frame" x="274" y="247" width="129" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Feature Attention" bezelStyle="regularSquare" imagePosition="right" alignment="left" inset="2" id="4748">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1559,7 +1559,7 @@
                         </connections>
                     </button>
                     <textField toolTip="Feature Attention Orientation0" verticalHuggingPriority="750" id="4750">
-                        <rect key="frame" x="416" y="228" width="78" height="22"/>
+                        <rect key="frame" x="416" y="245" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4751">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="4752">
@@ -1578,7 +1578,7 @@
                         </connections>
                     </textField>
                     <textField toolTip="Feature Attention Orientation1" verticalHuggingPriority="750" id="4754">
-                        <rect key="frame" x="504" y="228" width="78" height="22"/>
+                        <rect key="frame" x="504" y="245" width="78" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4755">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="4756">
@@ -1597,7 +1597,7 @@
                         </connections>
                     </textField>
                     <button toolTip="Use Feature Attention" id="EFD-Ba-eo8">
-                        <rect key="frame" x="128" y="25" width="169" height="18"/>
+                        <rect key="frame" x="102" y="29" width="169" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Single Stimulus Per Trial" bezelStyle="regularSquare" imagePosition="right" alignment="left" inset="2" id="pwX-w0-wW3">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1608,7 +1608,7 @@
                         </connections>
                     </button>
                     <button toolTip="Use Feature Attention" id="gq8-6i-ncz">
-                        <rect key="frame" x="104" y="5" width="193" height="18"/>
+                        <rect key="frame" x="78" y="8" width="193" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <buttonCell key="cell" type="check" title="Count Stimuli in Failed Trials" bezelStyle="regularSquare" imagePosition="right" alignment="left" inset="2" id="7S1-3k-K9e">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1619,7 +1619,7 @@
                         </connections>
                     </button>
                     <textField toolTip="Change in orientation for Target" verticalHuggingPriority="750" id="1311">
-                        <rect key="frame" x="418" y="202" width="78" height="22"/>
+                        <rect key="frame" x="381" y="200" width="39" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="4654">
                             <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="1315">
@@ -1637,30 +1637,201 @@
                             <binding destination="498" name="value" keyPath="values.SRCChangeInOrientationDeg" id="4734"/>
                         </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="2233">
-                        <rect key="frame" x="322" y="201" width="90" height="21"/>
+                    <textField toolTip="Change in orientation for Target" verticalHuggingPriority="750" id="V1P-WS-AZc">
+                        <rect key="frame" x="457" y="200" width="39" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="NumChanges " id="4661">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="A7K-ZI-IAC">
+                            <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="ZbP-BW-Md4">
+                                <attributedString key="attributedStringForZero">
+                                    <fragment content="0.0"/>
+                                </attributedString>
+                                <decimal key="minimum" value="0"/>
+                                <decimal key="maximum" value="NaN"/>
+                            </numberFormatter>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="498" name="value" keyPath="values.SRCChangeInOrientationTF1Deg" id="4SS-oM-yMq"/>
+                        </connections>
+                    </textField>
+                    <textField verticalHuggingPriority="750" id="2233">
+                        <rect key="frame" x="429" y="210" width="88" height="34"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="OriChanges " id="4661">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button toolTip="Uses staircase procedure" id="4716">
-                        <rect key="frame" x="502" y="204" width="118" height="18"/>
+                    <textField toolTip="Change in orientation for Target" verticalHuggingPriority="750" id="ocb-Va-9ck">
+                        <rect key="frame" x="381" y="224" width="39" height="22"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="check" title="Use Staircase" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4717">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="07m-lP-leB">
+                            <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" hasThousandSeparators="NO" thousandSeparator="," id="EZN-Og-Nwh">
+                                <attributedString key="attributedStringForZero">
+                                    <fragment content="0"/>
+                                </attributedString>
+                                <real key="minimum" value="1"/>
+                                <real key="maximum" value="8"/>
+                            </numberFormatter>
                             <font key="font" metaFont="system"/>
-                        </buttonCell>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
                         <connections>
-                            <binding destination="498" name="value" keyPath="values.SRCUseStaircaseProcedure" id="4738"/>
+                            <binding destination="498" name="value" keyPath="values.SRCNumChangesInOrientation" id="UeY-ea-tQo"/>
                         </connections>
-                    </button>
+                    </textField>
+                    <textField verticalHuggingPriority="750" id="8sG-Mv-hA2">
+                        <rect key="frame" x="262" y="212" width="117" height="34"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="NumOriChanges " id="hy4-3Y-0sT">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="PGd-6K-5vu">
+                        <rect key="frame" x="362" y="10" width="240" height="188"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" id="gCn-nc-Tsn">
+                            <rect key="frame" x="1" y="0.0" width="238" height="187"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveName="SRCChangeArrayTable" headerView="QZa-yd-Dom" id="0MB-lK-Koa">
+                                    <rect key="frame" x="0.0" y="0.0" width="238" height="170"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn identifier="change" width="70" minWidth="40" maxWidth="1000" id="tgd-Mw-nJl">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF0">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333299" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" id="Hb6-6o-lYB">
+                                                <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="lpT-Z4-sXB">
+                                                    <attributedString key="attributedStringForZero">
+                                                        <fragment content="0.0"/>
+                                                    </attributedString>
+                                                    <decimal key="minimum" value="-180"/>
+                                                    <decimal key="maximum" value="180"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="5fk-JG-lgK" name="value" keyPath="arrangedObjects.TF0" id="XIu-eH-hs5"/>
+                                            </connections>
+                                        </tableColumn>
+                                        <tableColumn identifier="validReps" width="74.46142578125" minWidth="71.91455078125" maxWidth="1000" id="4ZU-ro-Tdq">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF1">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333299" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" id="2wA-Yb-cEs">
+                                                <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="MIV-n5-LI9">
+                                                    <attributedString key="attributedStringForZero">
+                                                        <fragment content="0"/>
+                                                    </attributedString>
+                                                    <decimal key="minimum" value="NaN"/>
+                                                    <decimal key="maximum" value="NaN"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="5fk-JG-lgK" name="value" keyPath="arrangedObjects.TF1" id="SEC-0n-nc8"/>
+                                            </connections>
+                                        </tableColumn>
+                                        <tableColumn identifier="invalidReps" width="84.54638671875" minWidth="43.04638671875" maxWidth="1000" id="dRw-Mt-SVq">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF2">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" id="FzF-vt-25I">
+                                                <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" localizesFormat="NO" hasThousandSeparators="NO" thousandSeparator="," id="Tvr-ft-NwJ">
+                                                    <attributedString key="attributedStringForZero">
+                                                        <fragment content="0"/>
+                                                    </attributedString>
+                                                    <decimal key="minimum" value="NaN"/>
+                                                    <decimal key="maximum" value="NaN"/>
+                                                </numberFormatter>
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="5fk-JG-lgK" name="value" keyPath="arrangedObjects.TF2" id="zt1-r2-5d5"/>
+                                            </connections>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <binding destination="5fk-JG-lgK" name="content" keyPath="arrangedObjects" id="c0g-uz-nP9"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Oe4-bt-VVz">
+                            <rect key="frame" x="1" y="171" width="238" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="D8m-hV-Cpp">
+                            <rect key="frame" x="224" y="17" width="15" height="170"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <tableHeaderView key="headerView" id="QZa-yd-Dom">
+                            <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </tableHeaderView>
+                    </scrollView>
+                    <textField toolTip="Change in orientation for Target" verticalHuggingPriority="750" id="k7Y-gM-p7d">
+                        <rect key="frame" x="532" y="200" width="39" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="jbW-Ml-euz">
+                            <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.0" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="," id="lHl-zR-Ngt">
+                                <attributedString key="attributedStringForZero">
+                                    <fragment content="0.0"/>
+                                </attributedString>
+                                <decimal key="minimum" value="0"/>
+                                <decimal key="maximum" value="NaN"/>
+                            </numberFormatter>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="498" name="value" keyPath="values.SRCChangeInOrientationTF2Deg" id="Ssy-0E-fak"/>
+                        </connections>
+                    </textField>
                 </subviews>
             </view>
             <point key="canvasLocation" x="595" y="801"/>
         </window>
+        <arrayController objectClassName="NSMutableArray" id="5fk-JG-lgK" userLabel="Change Table">
+            <declaredKeys>
+                <string>Change Table</string>
+            </declaredKeys>
+            <connections>
+                <binding destination="498" name="contentArray" keyPath="values.SRCChangeArray" id="6Mv-Mi-ipd">
+                    <dictionary key="options">
+                        <bool key="NSHandlesContentAsCompoundValue" value="YES"/>
+                    </dictionary>
+                </binding>
+            </connections>
+        </arrayController>
         <menu title="Menu" autoenablesItems="NO" id="813" userLabel="Actions">
             <items>
                 <menuItem title="Run" keyEquivalent="r" id="816">
