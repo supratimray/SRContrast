@@ -390,13 +390,19 @@ and stimLeadMS.  Note that it is possible to set parameters so that there will n
 	
 	// If this is not a catch trial, load the target stimulus, chosen at random from all non-zero contrasts
 	if (targetIndex < stimListLength) {	
+
+        if (useSingleStimulusPerTrialFlag) {
+            pTrial->targetContrastIndex = cSingleStimulusPerTrial;
+            pTrial->targetTemporalFreqIndex = tSingleStimulusPerTrial;
+        }
+        else {
+            if ([[task defaults] boolForKey:SRCUseSmallestContrastTargetKey])
+                pTrial->targetContrastIndex = [self randomVisibleContrastIndex:contrasts];
+            else
+                pTrial->targetContrastIndex = [self randomVisibleAndNotSmallestContrastIndex:contrasts];
 		
-		if ([[task defaults] boolForKey:SRCUseSmallestContrastTargetKey])
-			pTrial->targetContrastIndex = [self randomVisibleContrastIndex:contrasts];
-		else
-			pTrial->targetContrastIndex = [self randomVisibleAndNotSmallestContrastIndex:contrasts];
-		
-		pTrial->targetTemporalFreqIndex = (rand() % temporalFreqs);
+            pTrial->targetTemporalFreqIndex = (rand() % temporalFreqs);
+        }
 
 		if (attendLoc == kAttend0) {
 			[self insertStimSettingsAtIndex:-1 trial:pTrial type0:kTargetStim
